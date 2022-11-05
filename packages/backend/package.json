@@ -1,0 +1,33 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "format": "prettier --write .",
+    "lint": "eslint .",
+    "build": "ncc build ./src/server.ts -o build",
+    "start": "nodemon --watch './src/**/*.ts' --exec ts-node ./src/server.ts",
+    "start:dev": "nodemon ./src/server.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "express": "^4.18.2",
+    "pino": "^8.7.0"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.19.2",
+    "@types/express": "^4.17.14",
+    "@types/node": "^18.11.9",
+    "@vercel/ncc": "^0.34.0",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.0.3",
+    "nodemon": "^2.0.20",
+    "pino-pretty": "^9.1.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.4"
+  }
+}
