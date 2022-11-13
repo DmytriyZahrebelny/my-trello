@@ -1,5 +1,6 @@
 import express from 'express';
-import * as bodyParser from 'body-parser';
+import type { Application } from 'express';
+import bodyParser from 'body-parser';
 
 import { getLogger } from './lib/logger';
 import { post } from './server';
@@ -8,7 +9,7 @@ import { loggerMiddleware } from './middleware';
 const logger = getLogger({ name: 'app' });
 
 export class App {
-  public app: express.Application;
+  public app: Application;
   public port: number;
 
   constructor(controllers: [typeof post], port: number) {
