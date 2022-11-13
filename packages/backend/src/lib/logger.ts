@@ -4,14 +4,14 @@ const Env = {
   DEVELOPMENT: `development`,
   PRODUCTION: `production`,
 };
-
+console.log(process.env.NODE_ENV)
 const isDevMode = process.env.NODE_ENV === Env.DEVELOPMENT;
 const defaultLogLevel = isDevMode ? `info` : `info`;
 
 const logger = pino({
   name: `base-logger`,
   level: process.env.LOG_LEVEL || defaultLogLevel,
-  prettyPrint: isDevMode,
+  // prettyPrint: isDevMode,
   transport: {
     target: 'pino-pretty',
     options: {
