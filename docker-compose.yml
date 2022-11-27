@@ -6,8 +6,9 @@ services:
       context: packages/backend
       args:
         - PORT=4000
+        - NODE_ENV=production
     ports:
-      - '8000:4000'
+      - 8000:4000
     environment:
       - NODE_ENV=production
     command: pnpm start
@@ -17,11 +18,30 @@ services:
       context: packages/backend
       args:
         - PORT=4000
+        - NODE_ENV=development
+    depends_on:
+      - db
     ports:
-      - '8000:4000'
+      - 8000:4000
     volumes:
       - ./packages/backend/:/usr/src/app
       - /usr/src/app/node_modules
     environment:
       - NODE_ENV=development
     command: pnpm start:dev
+
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1
+      - POSTGRES_DB=trello_db
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
