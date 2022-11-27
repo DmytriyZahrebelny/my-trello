@@ -3,8 +3,8 @@ import type { Application } from 'express';
 import bodyParser from 'body-parser';
 
 import { getLogger } from './lib/logger';
-import { post } from './server';
 import { loggerMiddleware } from './middleware';
+import { Controllers } from './server';
 
 const logger = getLogger({ name: 'app' });
 
@@ -12,7 +12,7 @@ export class App {
   public app: Application;
   public port: number;
 
-  constructor(controllers: [typeof post], port: number) {
+  constructor(controllers: Controllers, port: number) {
     this.app = express();
     this.port = port;
 
@@ -25,7 +25,7 @@ export class App {
     this.app.use(loggerMiddleware);
   }
 
-  private initializeControllers(controllers: [typeof post]) {
+  private initializeControllers(controllers: Controllers) {
     controllers.forEach((controller) => {
       this.app.use('/', controller.router);
     });
