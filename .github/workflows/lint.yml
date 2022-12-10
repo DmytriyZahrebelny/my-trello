@@ -4,6 +4,8 @@ on: [push]
 
 jobs:
   eslint:
+    name: ESLint
+    runs-on: ubuntu-latest
     container:
       image: node:18.12.1-alpine
     steps:
@@ -14,6 +16,8 @@ jobs:
         run: npm run lint
 
   prettier:
+    name: Prettier
+    runs-on: ubuntu-latest
     container:
       image: node:18.12.1-alpine
     steps:
