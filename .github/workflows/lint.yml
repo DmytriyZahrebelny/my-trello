@@ -37,9 +37,8 @@ jobs:
       image: node:18.12.1-alpine
     steps:
       - uses: actions/checkout@v3
-      - name: Install pnpm
-      - name: Cache dependencies
-        uses: actions/cache@v3
+      - uses: actions/cache@v3
+        name: Cache dependencies
         with:
           path: ~/.pnpm-store
           key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
@@ -55,7 +54,6 @@ jobs:
   #     image: node:18.12.1-alpine
   #   steps:
   #     - uses: actions/checkout@v3
-  #     - name: Install pnpm
   #     - name: Cache dependencies
   #       uses: actions/cache@v3
   #       with:
