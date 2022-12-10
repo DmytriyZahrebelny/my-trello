@@ -9,25 +9,17 @@ jobs:
     container:
       image: node:18.12.1-alpine
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2.2.2
-        name: Install pnpm
-        id: pnpm-install
+      - uses: actions/checkout@v3
+      - name: Install pnpm
+        run: npm install --global pnpm@latest
+      - name: Cache dependencies
+        uses: actions/cache@v3
         with:
-          version: 7.18.1
-          run_install: false
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        run: pnpm config set store-dir ~/.pnpm-store
-      - uses: actions/cache@v3
-        name: Cache dependencies
-        with:
-          path: ~/.pnpm-store
+          path: ~/.pmpm
           key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: pnpm-
+          restore-keys: npm-
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
   eslint:
     needs: build
@@ -37,28 +29,28 @@ jobs:
       image: node:18.12.1-alpine
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/cache@v3
-        name: Cache dependencies
+      - name: Cache dependencies
+        uses: actions/cache@v3
         with:
-          path: ~/.pnpm-store
+          path: ~/.pmpm
           key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: pnpm-
+          restore-keys: npm-
       - name: Lint source code with ESLint
         run: pnpm run lint
 
-  # prettier:
-  #   needs: build
-  #   name: Prettier
-  #   runs-on: ubuntu-latest
-  #   container:
-  #     image: node:18.12.1-alpine
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - name: Cache dependencies
-  #       uses: actions/cache@v3
-  #       with:
-  #         path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-  #         key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
-  #         restore-keys: pnpm-
-  #     - name: Prettify our source code with Prettier
-  #       run: pnpm run check:format
+  prettier:
+  needs: build
+    name: Prettier
+    runs-on: ubuntu-latest
+    container:
+      image: node:18.12.1-alpine
+    steps:
+      - uses: actions/checkout@v3
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.pmpm
+          key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: npm-
+      - name: Prettify our source code with Prettier
+        run: pnpm run check:format
