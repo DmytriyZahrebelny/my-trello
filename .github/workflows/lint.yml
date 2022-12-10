@@ -20,12 +20,11 @@ jobs:
       - name: Get pnpm store directory
         id: pnpm-cache
         shell: bash
-        run: |
-          echo "STORE_PATH=pnpm-store" >> $GITHUB_OUTPUT
+        run: pnpm config set store-dir ~/.pnpm-store
       - uses: actions/cache@v3
         name: Cache dependencies
         with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          path: ~/.pnpm-store
           key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
           restore-keys: pnpm-
       - name: Install dependencies
