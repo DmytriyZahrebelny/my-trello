@@ -29,23 +29,23 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-  # eslint:
-  #   needs: build
-  #   name: ESLint
-  #   runs-on: ubuntu-latest
-  #   container:
-  #     image: node:18.12.1-alpine
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - name: Install pnpm
-  #     - name: Cache dependencies
-  #       uses: actions/cache@v3
-  #       with:
-  #         path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-  #         key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
-  #         restore-keys: pnpm-
-  #     - name: Lint source code with ESLint
-  #       run: pnpm run lint
+  eslint:
+    needs: build
+    name: ESLint
+    runs-on: ubuntu-latest
+    container:
+      image: node:18.12.1-alpine
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install pnpm
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.pnpm-store
+          key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: pnpm-
+      - name: Lint source code with ESLint
+        run: pnpm run lint
 
   # prettier:
   #   needs: build
