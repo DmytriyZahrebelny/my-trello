@@ -10,10 +10,12 @@ jobs:
       image: node:18.12.1-alpine
     steps:
       - uses: actions/checkout@v3
-      - name: Install dependencies
+      - name: Install pnpm
         run: npm install
+      - name: Install dependencies
+        run: pnpm install
       - name: Lint source code with ESLint
-        run: npm run lint
+        run: pnpm run lint
 
   prettier:
     name: Prettier
@@ -22,7 +24,9 @@ jobs:
       image: node:18.12.1-alpine
     steps:
       - uses: actions/checkout@v3
-      - name: Install dependencies
+      - name: Install pnpm
         run: npm install
+      - name: Install dependencies
+        run: pnpm install
       - name: Prettify our source code with Prettier
-        run: npm run check:format
+        run: pnpm run check:format
