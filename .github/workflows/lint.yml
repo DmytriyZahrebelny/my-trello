@@ -22,8 +22,8 @@ jobs:
         shell: bash
         run: |
           echo "STORE_PATH=$(.pnpm)" >> $GITHUB_OUTPUT
-      - name: Cache dependencies
-        uses: actions/cache@v3
+      - uses: actions/cache@v3
+        name: Cache dependencies
         with:
           path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
           key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
@@ -31,38 +31,38 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-  eslint:
-    needs: build
-    name: ESLint
-    runs-on: ubuntu-latest
-    container:
-      image: node:18.12.1-alpine
-    steps:
-      - uses: actions/checkout@v3
-      - name: Install pnpm
-      - name: Cache dependencies
-        uses: actions/cache@v3
-        with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-          key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: pnpm-
-      - name: Lint source code with ESLint
-        run: pnpm run lint
+  # eslint:
+  #   needs: build
+  #   name: ESLint
+  #   runs-on: ubuntu-latest
+  #   container:
+  #     image: node:18.12.1-alpine
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - name: Install pnpm
+  #     - name: Cache dependencies
+  #       uses: actions/cache@v3
+  #       with:
+  #         path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+  #         key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+  #         restore-keys: pnpm-
+  #     - name: Lint source code with ESLint
+  #       run: pnpm run lint
 
-  prettier:
-    needs: build
-    name: Prettier
-    runs-on: ubuntu-latest
-    container:
-      image: node:18.12.1-alpine
-    steps:
-      - uses: actions/checkout@v3
-      - name: Install pnpm
-      - name: Cache dependencies
-        uses: actions/cache@v3
-        with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-          key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: pnpm-
-      - name: Prettify our source code with Prettier
-        run: pnpm run check:format
+  # prettier:
+  #   needs: build
+  #   name: Prettier
+  #   runs-on: ubuntu-latest
+  #   container:
+  #     image: node:18.12.1-alpine
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - name: Install pnpm
+  #     - name: Cache dependencies
+  #       uses: actions/cache@v3
+  #       with:
+  #         path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+  #         key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+  #         restore-keys: pnpm-
+  #     - name: Prettify our source code with Prettier
+  #       run: pnpm run check:format
