@@ -10,16 +10,25 @@ jobs:
       image: node:18.12.1-alpine
     steps:
       - uses: actions/checkout@v3
-      - name: Install pnpm
-        run: npm install --global pnpm@latest
-      - name: Cache dependencies
-        uses: actions/cache@v2
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        id: pnpm-install
         with:
-          path: ~/.pnpm
+          version: 7
+          run_install: false
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(.pnpm)" >> $GITHUB_OUTPUT
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
           key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
           restore-keys: pnpm-
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install
 
   eslint:
     needs: build
@@ -30,11 +39,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install pnpm
-        run: npm install --global pnpm@latest
       - name: Cache dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
-          path: ~/.pnpm
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
           key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
           restore-keys: pnpm-
       - name: Lint source code with ESLint
@@ -49,11 +57,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install pnpm
-        run: npm install --global pnpm@latest
       - name: Cache dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
-          path: ~/.pnpm
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
           key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
           restore-keys: pnpm-
       - name: Prettify our source code with Prettier
