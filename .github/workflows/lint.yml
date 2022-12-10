@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install pnpm
-        run: npm install
+        run: npm install --global pnpm
       - name: Install dependencies
         run: pnpm install
       - name: Lint source code with ESLint
@@ -25,7 +25,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install pnpm
-        run: npm install
+        run: npm install --global pnpm
       - name: Install dependencies
         run: pnpm install
       - name: Prettify our source code with Prettier
