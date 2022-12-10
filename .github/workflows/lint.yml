@@ -9,7 +9,8 @@ jobs:
     container:
       image: node:18.12.1-alpine
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
       - uses: pnpm/action-setup@v2
         name: Install pnpm
         id: pnpm-install
