@@ -12,8 +12,8 @@ jobs:
       - uses: actions/checkout@v3
       - name: Install pnpm
         run: npm install --global pnpm@latest
-      - name: Cache dependencies
-        uses: actions/cache@v3
+      - uses: actions/cache@v3
+        name: Cache dependencies
         with:
           path: ~/.pmpm
           key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
@@ -29,8 +29,8 @@ jobs:
       image: node:18.12.1-alpine
     steps:
       - uses: actions/checkout@v3
-      - name: Cache dependencies
-        uses: actions/cache@v3
+      - uses: actions/cache@v3
+        name: Cache dependencies
         with:
           path: ~/.pmpm
           key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
@@ -46,8 +46,8 @@ jobs:
       image: node:18.12.1-alpine
     steps:
       - uses: actions/checkout@v3
-      - name: Cache dependencies
-        uses: actions/cache@v3
+      - uses: actions/cache@v3
+        name: Cache dependencies
         with:
           path: ~/.pmpm
           key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
