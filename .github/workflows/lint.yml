@@ -3,17 +3,38 @@ name: lint
 on: [push]
 
 jobs:
-  eslint:
-    name: ESLint
+  build:
+    name: Build
     runs-on: ubuntu-latest
     container:
       image: node:18.12.1-alpine
     steps:
       - uses: actions/checkout@v3
       - name: Install pnpm
-        run: npm install --global pnpm
+        run: npm install --global pnpm@latest
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.pmpm
+          key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: npm-
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
+
+  eslint:
+    needs: build
+    name: ESLint
+    runs-on: ubuntu-latest
+    container:
+      image: node:18.12.1-alpine
+    steps:
+      - uses: actions/checkout@v3
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.pmpm
+          key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: npm-
       - name: Lint source code with ESLint
         run: pnpm run lint
 
@@ -24,9 +45,11 @@ jobs:
       image: node:18.12.1-alpine
     steps:
       - uses: actions/checkout@v3
-      - name: Install pnpm
-        run: npm install --global pnpm
-      - name: Install dependencies
-        run: pnpm install
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.pmpm
+          key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: npm-
       - name: Prettify our source code with Prettier
         run: pnpm run check:format
