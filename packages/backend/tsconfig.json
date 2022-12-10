@@ -1,11 +1,10 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "lib": [
-      "ESNext"
-    ],
-    "module": "commonjs",
-    "moduleResolution": "node",
+    "lib": ["ESNext"],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "sourceMap": true,
     "baseUrl": "./",
     "outDir": "./build",
     "esModuleInterop": true,
@@ -14,6 +13,6 @@
     "skipLibCheck": true,
     "types": ["node"]
   },
-  "include": ["**/*.ts", "src/server.ts", "src/app.ts"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules", "**/*.d.ts"]
 }
