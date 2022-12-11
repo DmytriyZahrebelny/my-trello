@@ -55,10 +55,10 @@ jobs:
         with:
           path: node_modules
           key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: pnpm-
+          restore-keys: ${{ runner.os }}-pnpm-
 
       - name: Lint source code with ESLint
-        run: ${{ runner.os }}-pnpm run lint
+        run: pnpm run lint
 
   prettier:
     needs: build
