@@ -39,7 +39,7 @@ jobs:
         run: pnpm run lint
 
   prettier:
-  needs: build
+    needs: build
     name: Prettier
     runs-on: ubuntu-latest
     container:
