@@ -65,7 +65,7 @@ jobs:
       - uses: actions/cache@v3
         name: Cache dependencies
         with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH.node_modules }}
           key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
           restore-keys: pnpm-
       - name: Lint source code with ESLint
