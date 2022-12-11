@@ -18,7 +18,7 @@ jobs:
         name: Install pnpm
         id: pnpm-install
         with:
-          version: 7
+          version: current
           run_install: false
 
       - uses: actions/cache@v3
@@ -47,7 +47,7 @@ jobs:
         name: Install pnpm
         id: pnpm-install
         with:
-          version: 7
+          version: current
           run_install: false
 
       - uses: actions/cache@v3
@@ -76,7 +76,7 @@ jobs:
         name: Install pnpm
         id: pnpm-install
         with:
-          version: 7
+          version: current
           run_install: false
 
       - name: Cache dependencies
