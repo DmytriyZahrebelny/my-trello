@@ -10,18 +10,14 @@ jobs:
       image: node:18.12.1-alpine
     steps:
       - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
-        name: Install pnpm
-        with:
-          version: 7
       - uses: actions/cache@v3
         name: Cache dependencies
         with:
           path: node_modules
-          key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: pnpm-
+          key: npm-${{ hashFiles('package-lock.json') }}-v4
+          restore-keys: npm-
       - name: Install dependencies
-        run: pnpm install
+        run: npm ci --ignore-scripts
 
   eslint:
     needs: build
@@ -31,18 +27,14 @@ jobs:
       image: node:18.12.1-alpine
     steps:
       - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
-        name: Install pnpm
-        with:
-          version: 7
       - uses: actions/cache@v3
         name: Cache dependencies
         with:
           path: node_modules
-          key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: pnpm-
+          key: npm-${{ hashFiles('package-lock.json') }}-v4
+          restore-keys: npm-
       - name: Lint source code with ESLint
-        run: pnpm run lint
+        run: npm run lint
 
   prettier:
     needs: build
@@ -52,15 +44,11 @@ jobs:
       image: node:18.12.1-alpine
     steps:
       - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
-        name: Install pnpm
-        with:
-          version: 7
       - name: Cache dependencies
         uses: actions/cache@v3
         with:
           path: node_modules
-          key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: pnpm-
+          key: npm-${{ hashFiles('package-lock.json') }}-v4
+          restore-keys: npm-
       - name: Prettify our source code with Prettier
-        run: pnpm run check:format
+        run: npm run check:format
