@@ -12,7 +12,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: current
 
       - uses: pnpm/action-setup@v2
         name: Install pnpm
@@ -41,18 +41,31 @@ jobs:
     needs: build
     name: ESLint
     runs-on: ubuntu-latest
-    container:
-      image: node:18.12.1-alpine
     steps:
       - uses: actions/checkout@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: current
+
       - uses: pnpm/action-setup@v2
         name: Install pnpm
+        id: pnpm-install
         with:
           version: 7
+          run_install: false
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
       - uses: actions/cache@v3
         name: Cache dependencies
         with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH. }}
           key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
           restore-keys: pnpm-
       - name: Lint source code with ESLint
@@ -62,14 +75,27 @@ jobs:
     needs: build
     name: Prettier
     runs-on: ubuntu-latest
-    container:
-      image: node:18.12.1-alpine
     steps:
       - uses: actions/checkout@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: current
+
       - uses: pnpm/action-setup@v2
         name: Install pnpm
+        id: pnpm-install
         with:
           version: 7
+          run_install: false
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
       - name: Cache dependencies
         uses: actions/cache@v3
         with:
