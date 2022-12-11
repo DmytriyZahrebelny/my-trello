@@ -20,6 +20,13 @@ jobs:
           restore-keys: npm-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+      - name: Build
+        run: npm run build
+      - name: Archive build
+        uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: build
 
   eslint:
     needs: build
@@ -28,6 +35,10 @@ jobs:
     container:
       image: node:18.12.1-alpine
     steps:
+      - name: Download a single artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: build
       - uses: actions/checkout@v3
       - uses: actions/cache@v3
         name: Cache dependencies
@@ -45,6 +56,10 @@ jobs:
     container:
       image: node:18.12.1-alpine
     steps:
+      - name: Download a single artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: build
       - uses: actions/checkout@v3
       - uses: actions/cache@v3
         name: Cache dependencies
