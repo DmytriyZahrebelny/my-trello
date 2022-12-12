@@ -15,6 +15,7 @@ export class BoardsController {
 
   async getBoards(req: Request, res: Response): Promise<void> {
     const data = await pool.query('SELECT * FROM boards');
+    console.log('test');
     res.status(200);
     res.send(data.rows);
   }
