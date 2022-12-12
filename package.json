@@ -4,6 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint .",
+    "check:format": "prettier --check ./packages/**/*.{ts,json}",
+    "format": "prettier --write ./packages/**/*.{ts,json}",
     "server": "docker-compose up backend_dev"
   },
   "keywords": [],
