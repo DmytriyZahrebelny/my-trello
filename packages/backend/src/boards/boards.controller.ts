@@ -11,6 +11,7 @@ export class BoardsController {
   public intializeRoutes(): void {
     this.router.get('/boards', this.getBoards);
     this.router.post('/create-board', this.createBoard);
+    console.log(true);
   }
 
   async getBoards(req: Request, res: Response): Promise<void> {
