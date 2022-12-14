@@ -21,12 +21,19 @@ jobs:
           version: 7
           run_install: false
 
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
       - uses: actions/cache@v3
         name: Cache dependencies
         with:
-          path: node_modules
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
           key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: ${{ runner.os }}-pnpm-
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -50,12 +57,19 @@ jobs:
           version: 7
           run_install: false
 
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
       - uses: actions/cache@v3
         name: Cache dependencies
         with:
-          path: node_modules
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
           key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: ${{ runner.os }}-pnpm-
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
 
       - name: Lint source code with ESLint
         run: pnpm run lint
@@ -79,12 +93,19 @@ jobs:
           version: 7
           run_install: false
 
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
       - name: Cache dependencies
         uses: actions/cache@v3
         with:
-          path: node_modules
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
           key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: ${{ runner.os }}-pnpm-
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
 
       - name: Prettify our source code with Prettier
         run: pnpm run check:format
