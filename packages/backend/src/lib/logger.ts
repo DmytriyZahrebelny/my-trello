@@ -20,7 +20,7 @@ const logger = pino(
       },
     },
   },
-  !isDevMode ? process.stdout : pino.destination(LOG_FILE)
+  isDevMode ? process.stdout : pino.destination(LOG_FILE)
 );
 
 export const getLogger = (options: Record<string, string> = {}) => {

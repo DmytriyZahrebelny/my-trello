@@ -9,8 +9,6 @@ services:
         - NODE_ENV=production
     ports:
       - 8000:4000
-    environment:
-      - NODE_ENV=production
     command: pnpm start
 
   backend_dev:
@@ -26,8 +24,6 @@ services:
     volumes:
       - ./packages/backend/:/usr/src/app
       - /usr/src/app/node_modules
-    environment:
-      - NODE_ENV=development
     command: pnpm start:dev
 
   db:
@@ -35,11 +31,8 @@ services:
     restart: always
     ports:
       - '5432:5432'
-    environment:
-      - POSTGRES_HOST_AUTH_METHOD=trust
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=1
-      - POSTGRES_DB=trello_db
+    env_file:
+      - ./.env.development.local
     volumes:
       - pgdata:/var/lib/postgresql/data
 
