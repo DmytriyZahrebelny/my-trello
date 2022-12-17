@@ -2,10 +2,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "umd",
-    "lib": [
-      "ESNext",
-      "dom"
-    ],
+    "lib": ["ESNext", "dom"],
     "jsx": "react-jsx",
     "noEmit": true,
     "sourceMap": true,
@@ -20,9 +17,5 @@
     "@app/*": ["./src/*"]
   },
   "include": ["src"],
-  "exclude": [
-    "./node_modules",
-    "dist",
-    "**/*.test.ts?(x)"
-  ]
+  "exclude": ["./node_modules", "dist", "**/*.test.ts?(x)"]
 }
