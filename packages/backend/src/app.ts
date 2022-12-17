@@ -1,6 +1,8 @@
 import express from 'express';
 import type { Application } from 'express';
 import bodyParser from 'body-parser';
+import cors from 'cors';
+import cookieParser from 'cookie-parser';
 
 import { getLogger } from './lib/logger';
 import { loggerMiddleware } from './middleware';
@@ -21,7 +23,9 @@ export class App {
   }
 
   private initializeMiddlewares() {
+    this.app.use(cors({ origin: 'http://localhost:8000', credentials: true }));
     this.app.use(bodyParser.json());
+    this.app.use(cookieParser());
     this.app.use(loggerMiddleware);
   }
 

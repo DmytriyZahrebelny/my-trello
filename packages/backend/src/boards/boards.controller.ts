@@ -8,9 +8,9 @@ export class BoardsController {
     this.intializeRoutes();
   }
 
-  public intializeRoutes(): void {
+  public intializeRoutes() {
     this.router.get('/boards', this.getBoards);
-    this.router.post('/create-board', this.createBoard);
+    this.router.post('/boards', this.createBoard);
   }
 
   async getBoards(req: Request, res: Response): Promise<void> {
@@ -20,10 +20,10 @@ export class BoardsController {
   }
 
   async createBoard(req: Request, res: Response, next: NextFunction): Promise<void> {
-    const { boardName }: { boardName: string } = await req.body;
+    const { name }: { name: string } = await req.body;
 
     try {
-      const result = await pool.query(`INSERT INTO boards (name) VALUES ('${boardName}')`);
+      const result = await pool.query(`INSERT INTO boards (name) VALUES ('${name}')`);
       res.send(result);
     } catch (error) {
       next(error);
