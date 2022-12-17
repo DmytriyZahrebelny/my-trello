@@ -21,6 +21,8 @@ services:
       - db
     ports:
       - 8000:4000
+    env_file:
+      - ./.env.development.local
     volumes:
       - ./packages/backend/:/usr/src/app
       - /usr/src/app/node_modules
