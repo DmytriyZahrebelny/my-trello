@@ -1,6 +1,8 @@
 const path = require("path");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const ESLintPlugin = require("eslint-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 
 module.exports = {
   entry: path.resolve(__dirname, "src/index.tsx"),
@@ -24,10 +26,13 @@ module.exports = {
       filename: "index.html",
       template: "./public/index.html",
     }),
+    new ESLintPlugin({ extensions: ["ts", "tsx"] }),
+    new ForkTsCheckerWebpackPlugin({ async: false }),
   ],
   resolve: {
     alias: {
-      "@app": path.resolve(__dirname, "src"),
+      "@core": path.resolve(__dirname, "src/core"),
+      "@views": path.resolve(__dirname, "src/views")
     },
     extensions: ['.tsx', '.ts', '.jsx', '.js'],
   },
