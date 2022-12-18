@@ -1,21 +1,24 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "module": "umd",
+    "module": "ESNext",
     "lib": ["ESNext", "dom"],
     "jsx": "react-jsx",
-    "noEmit": true,
     "sourceMap": true,
     "strict": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
     "moduleResolution": "node",
     "forceConsistentCasingInFileNames": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "skipLibCheck": true,
+    "jsxImportSource": "@emotion/react",
+    "paths": {
+      "@core/*": ["src/core/*"],
+      "@views/*": ["src/views/*"]
+    }
   },
-  "paths": {
-    "@app/*": ["./src/*"]
-  },
-  "include": ["src"],
+  "include": ["src/**/*"],
   "exclude": ["./node_modules", "dist", "**/*.test.ts?(x)"]
 }

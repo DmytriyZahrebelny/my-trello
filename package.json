@@ -20,5 +20,27 @@
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.7.1",
     "typescript": "^4.8.4"
+  },
+  "eslintConfig": {
+    "parser": "@typescript-eslint/parser",
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:prettier/recommended"
+    ],
+    "plugins": ["@typescript-eslint/eslint-plugin"],
+    "env": {
+      "node": true
+    },
+    "rules": {
+      "no-console": 1,
+      "prettier/prettier": 2,
+      "no-useless-escape": 0,
+      "no-use-before-define": "off",
+      "no-unused-vars": [
+        "error",
+        { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }
+      ]
+    }
   }
 }
