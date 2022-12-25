@@ -13,7 +13,7 @@ module.exports = merge(common, {
     open: true,
     static: { directory: path.join(__dirname, "dist") },
     port: process.env.PORT || 3000,
-    client: { overlay: false },
+    historyApiFallback: true,
   },
   externals: [{ window: "window" }],
 });
