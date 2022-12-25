@@ -1,14 +1,16 @@
-import { css } from '@mui/material/styles';
-import { Button } from '@mui/material';
+import { Avatar } from '@mui/material';
+import { LockOutlined as LockOutlinedIcon } from '@mui/icons-material';
+
+import { styles } from './authorization.styles';
+import { SignIn } from './sign-in';
 
 export const Authorization = () => {
-  const styles = {
-    header: css`
-      color: red;
-      background-color: yellow;
-      margin-bottom: 1.45rem;
-    `,
-  };
-
-  return <Button css={styles.header}>authorization</Button>;
+  return (
+    <div css={styles.container}>
+      <Avatar css={styles.avatar}>
+        <LockOutlinedIcon />
+      </Avatar>
+      <SignIn />
+    </div>
+  );
 };
