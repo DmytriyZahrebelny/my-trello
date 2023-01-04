@@ -4,10 +4,27 @@ import { Link } from 'react-router-dom';
 
 import { TextField } from '@core/components/text-field';
 import { Password } from '@core/components/password';
+import { useSignUpMutation } from '@core/api/api-authorization';
 import { styles } from '../authorization.styles';
 
+export interface RegisterParams {
+  name: string;
+  email: string;
+  password: string;
+}
+
 export const SignUp = () => {
-  const methods = useForm({ defaultValues: { name: '', email: '', password: '' } });
+  const methods = useForm<RegisterParams>({ defaultValues: { name: '', email: '', password: '' } });
+  const { mutate } = useSignUpMutation();
+
+  const onSubmit = (values: RegisterParams) => {
+    console.log(values);
+    mutate(values, {
+      onSuccess(data) {
+        console.log(data);
+      },
+    });
+  };
 
   return (
     <>
@@ -15,10 +32,11 @@ export const SignUp = () => {
         Sign Up
       </Typography>
       <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit((values: unknown) => values)} css={styles.form}>
+        <form onSubmit={methods.handleSubmit(onSubmit)} css={styles.form}>
           <TextField name="name" label="Name" />
           <TextField name="email" label="Email" />
           <Password name="password" label="Password" />
+          <Password name="repeatedPassword" label="Repeated password" />
           <Button size="large" type="submit">
             Sign Up
           </Button>

@@ -24,10 +24,10 @@ export const Password = ({ name, label = 'password' }: Props) => {
 
   return (
     <FormControl variant="outlined" css={passwordStyle}>
-      <InputLabel htmlFor="password">{label}</InputLabel>
+      <InputLabel htmlFor={name}>{label}</InputLabel>
       <OutlinedInput
         {...field}
-        id="password"
+        id={name}
         label={label}
         type={showPassword ? 'text' : 'password'}
         endAdornment={

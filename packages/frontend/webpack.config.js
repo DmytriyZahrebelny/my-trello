@@ -26,7 +26,7 @@ module.exports = {
       filename: "index.html",
       template: "./public/index.html",
     }),
-    new ESLintPlugin({ extensions: ["ts", "tsx"] }),
+    new ESLintPlugin({ extensions: ["ts", "tsx"], emitWarning: false }),
     new ForkTsCheckerWebpackPlugin({ async: false }),
   ],
   resolve: {
