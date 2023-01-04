@@ -2,7 +2,7 @@ import express, { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 
 import { HTTP_CODE } from '../constants';
-import { createAccessToken, createRefreshToken, sendRefreshToken } from '../lib/jwt';
+import { createTokens } from '../lib/jwt';
 import { UserService } from './user.service';
 import { userValidator } from './user.middleware';
 import { LoginParams } from './user.types';
@@ -16,18 +16,19 @@ export class UserController {
   }
 
   public intializeRoutes() {
-    this.router.post('/register', userValidator(this.userService), this.register.bind(this));
-    this.router.get('/login', this.login.bind(this));
+    this.router.post('/sign-up', userValidator(this.userService), this.signUp.bind(this));
+    this.router.post('/sign-in', this.signIn.bind(this));
+    this.router.post('/refresh-token', this.refreshToken.bind(this));
     this.router.put('/logout', this.logout.bind(this));
   }
 
-  async register(req: Request, res: Response) {
+  async signUp(req: Request, res: Response) {
     const user = await this.userService.create(req.body);
 
     res.status(HTTP_CODE.CREATED).json(user);
   }
 
-  async login(req: Request, res: Response) {
+  async signIn(req: Request, res: Response) {
     const { email, password }: LoginParams = req.body;
 
     const user = await this.userService.findByEmail(email);
@@ -39,27 +40,41 @@ export class UserController {
     const isPasswordCorrect = await bcrypt.compare(password, user.password);
 
     if (isPasswordCorrect) {
-      const accessToken = createAccessToken(user.id);
-      const refreshToken = createRefreshToken(user.id);
+      const { accessToken, refreshToken, expiresIn } = createTokens(user.id);
 
-      await this.userService.setRefreshToken(refreshToken, user.id);
+      await this.userService.refreshToken(refreshToken, user.id);
 
-      sendRefreshToken(res, refreshToken);
       res.status(HTTP_CODE.OK).send({
+        refreshToken,
         accessToken,
+        expiresIn,
         id: user.id,
         email: user.email,
-        firstname: user.firstname,
-        lastname: user.lastname,
+        name: user.name,
       });
     } else {
       res.status(HTTP_CODE.UNAUTHORIZED).send({ meassage: 'Email or password are wrong' });
     }
   }
 
+  async refreshToken(req: Request, res: Response) {
+    const { refreshToken: token }: { refreshToken: string } = req.body;
+
+    if (!token) return res.send({ accessToken: '' });
+
+    const user = await this.userService.findByToken(token);
+
+    if (!user) return res.send({ accessToken: '' });
+
+    const { accessToken, refreshToken, expiresIn } = createTokens(user.id);
+
+    await this.userService.refreshToken(refreshToken, user.id);
+
+    return res.send({ accessToken, refreshToken, expiresIn });
+  }
+
   async logout(req: Request, res: Response) {
     const { userId } = req.body;
-    res.clearCookie('refreshtoken', { path: '/refresh_token' });
 
     await this.userService.removeRefreshToken(userId as string);
 
