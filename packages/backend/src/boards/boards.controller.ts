@@ -1,5 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express';
+
 import { pool } from '../lib/db';
+import { authenticateJwt } from '../middleware';
 
 export class BoardsController {
   public router = express.Router();
@@ -9,8 +11,8 @@ export class BoardsController {
   }
 
   public intializeRoutes() {
-    this.router.get('/boards', this.getBoards);
-    this.router.post('/boards', this.createBoard);
+    this.router.get('/boards', authenticateJwt, this.getBoards);
+    this.router.post('/boards', authenticateJwt, this.createBoard);
   }
 
   async getBoards(req: Request, res: Response): Promise<void> {

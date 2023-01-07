@@ -1,6 +1,5 @@
 export interface RegisterParams {
-  firstname: string;
-  lastname: string;
+  name: string;
   email: string;
   password: string;
 }
@@ -12,9 +11,8 @@ export interface LoginParams {
 
 export interface User {
   id: string;
-  firstname: string;
-  lastname: string;
+  name: string;
   email: string;
   password: string;
-  refreshtoken: string;
+  refreshToken: string;
 }
