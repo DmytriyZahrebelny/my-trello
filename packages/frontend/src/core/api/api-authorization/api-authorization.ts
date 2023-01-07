@@ -3,32 +3,7 @@ import { useMutation } from 'react-query';
 
 import { axiosAuthInstance } from '../api';
 import { ENDPOINTS } from '../api.constants';
-
-export interface SignUpParams {
-  name: string;
-  email: string;
-  password: string;
-}
-
-export interface SignInParams {
-  email: string;
-  password: string;
-}
-
-export interface SignInResponse {
-  refreshToken: string;
-  accessToken: string;
-  expiresIn: number;
-  id: string;
-  email: string;
-  name: string;
-}
-
-export interface RefreshTokenResponse {
-  refreshToken: string;
-  accessToken: string;
-  expiresIn: number;
-}
+import { SignInParams, SignUpParams, SignInResponse, RefreshTokenResponse } from '../api.types';
 
 export const signUp = <T>(body: T): Promise<Omit<SignUpParams, 'password'>> =>
   axiosAuthInstance.post(ENDPOINTS.singUp, body);

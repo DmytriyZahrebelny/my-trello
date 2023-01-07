@@ -13,7 +13,15 @@ interface Props {
 
 export const TextField = ({ name, label }: Props) => {
   const { control } = useFormContext();
-  const { field } = useController({ control, name });
+  const { field, fieldState } = useController({ control, name });
 
-  return <MUITextField css={textFieldStyle} {...field} label={label} />;
+  return (
+    <MUITextField
+      css={textFieldStyle}
+      {...field}
+      label={label}
+      error={Boolean(fieldState.error?.message)}
+      helperText={fieldState.error?.message}
+    />
+  );
 };

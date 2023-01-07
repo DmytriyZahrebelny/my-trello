@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useFormContext, useController } from 'react-hook-form';
-import { FormControl, OutlinedInput, InputLabel, InputAdornment, IconButton } from '@mui/material';
+import { FormControl, OutlinedInput, InputLabel, InputAdornment, IconButton, FormHelperText } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { css } from '@emotion/react';
 
@@ -15,7 +15,7 @@ const passwordStyle = css`
 
 export const Password = ({ name, label = 'password' }: Props) => {
   const { control } = useFormContext();
-  const { field } = useController({ control, name });
+  const { field, fieldState } = useController({ control, name });
   const [showPassword, setShowPassword] = useState(false);
 
   const onShowPasswordClick = () => {
@@ -23,7 +23,7 @@ export const Password = ({ name, label = 'password' }: Props) => {
   };
 
   return (
-    <FormControl variant="outlined" css={passwordStyle}>
+    <FormControl error={Boolean(fieldState.error?.message)} variant="outlined" css={passwordStyle}>
       <InputLabel htmlFor={name}>{label}</InputLabel>
       <OutlinedInput
         {...field}
@@ -38,6 +38,7 @@ export const Password = ({ name, label = 'password' }: Props) => {
           </InputAdornment>
         }
       />
+      {fieldState.error?.message && <FormHelperText>{fieldState.error?.message}</FormHelperText>}
     </FormControl>
   );
 };

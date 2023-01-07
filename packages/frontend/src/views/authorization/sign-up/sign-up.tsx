@@ -1,27 +1,34 @@
 import { Button, Typography } from '@mui/material';
 import { useForm, FormProvider } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 import { TextField } from '@core/components/text-field';
 import { Password } from '@core/components/password';
 import { useSignUpMutation } from '@core/api/api-authorization';
 import { styles } from '../authorization.styles';
+import { validateSignUpSchema } from './sign-up.helpers';
 
-export interface RegisterParams {
+export interface FormValues {
   name: string;
   email: string;
   password: string;
+  repeatedPassword: string;
 }
 
 export const SignUp = () => {
-  const methods = useForm<RegisterParams>({ defaultValues: { name: '', email: '', password: '' } });
+  const navigate = useNavigate();
+  const methods = useForm<FormValues>({ resolver: validateSignUpSchema });
   const { mutate } = useSignUpMutation();
 
-  const onSubmit = (values: RegisterParams) => {
-    console.log(values);
+  const onSubmit = (values: FormValues) => {
     mutate(values, {
-      onSuccess(data) {
-        console.log(data);
+      onSuccess() {
+        Notify.success('Success');
+        navigate('/');
+      },
+      onError({ message }) {
+        Notify.failure(message);
       },
     });
   };

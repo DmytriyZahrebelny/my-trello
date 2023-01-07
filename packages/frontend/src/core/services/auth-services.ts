@@ -12,7 +12,7 @@ export const getRefreshToken = () => cookies.get(COOKIE_NAME_LIST.AUTH_REFRESH_T
 export const getAccessToken = () => cookies.get(COOKIE_NAME_LIST.AUTH_ACCESS_TOKEN);
 export const setTokens = ({ accessToken, refreshToken, expiresIn }: TokensArgs) => {
   cookies.set(COOKIE_NAME_LIST.AUTH_ACCESS_TOKEN, accessToken, {
-    expires: expiresIn,
+    expires: new Date(new Date().getTime() + expiresIn * 60 * 1000),
   });
 
   cookies.set(COOKIE_NAME_LIST.AUTH_REFRESH_TOKEN, refreshToken, {
