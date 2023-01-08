@@ -16,7 +16,8 @@ export const tokenInterceptors = async (config: AxiosRequestConfig<AxiosHeaders>
       setTokens({
         accessToken: response.data.accessToken,
         refreshToken: response.data.refreshToken,
-        expiresIn: response.data.expiresIn,
+        accessTokenExpiresIn: response.data.accessTokenExpiresIn,
+        refreshTokenExpiresIn: response.data.refreshTokenExpiresIn,
       });
 
       return {

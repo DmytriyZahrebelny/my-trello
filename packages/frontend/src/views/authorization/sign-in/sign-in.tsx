@@ -23,8 +23,8 @@ export const SignIn = () => {
 
   const onSubmit = (values: FormValues) => {
     mutate(values, {
-      onSuccess({ data: { accessToken, refreshToken, expiresIn } }) {
-        setTokens({ accessToken, refreshToken, expiresIn });
+      onSuccess({ data }) {
+        setTokens(data);
       },
       onError({ message }) {
         Notify.failure(message);
