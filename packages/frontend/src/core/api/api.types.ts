@@ -9,17 +9,15 @@ export interface SignInParams {
   password: string;
 }
 
-export interface SignInResponse {
-  refreshToken: string;
-  accessToken: string;
-  expiresIn: number;
-  id: string;
-  email: string;
-  name: string;
-}
-
 export interface RefreshTokenResponse {
   refreshToken: string;
   accessToken: string;
-  expiresIn: number;
+  accessTokenExpiresIn: number;
+  refreshTokenExpiresIn: number;
+}
+
+export interface SignInResponse extends RefreshTokenResponse {
+  id: string;
+  email: string;
+  name: string;
 }

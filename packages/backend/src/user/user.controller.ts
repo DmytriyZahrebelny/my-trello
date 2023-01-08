@@ -40,14 +40,15 @@ export class UserController {
     const isPasswordCorrect = await bcrypt.compare(password, user.password);
 
     if (isPasswordCorrect) {
-      const { accessToken, refreshToken, expiresIn } = createTokens(user.id);
+      const { accessToken, refreshToken, accessTokenExpiresIn, refreshTokenExpiresIn } = createTokens(user.id);
 
       await this.userService.refreshToken(refreshToken, user.id);
 
       res.status(HTTP_CODE.OK).send({
         refreshToken,
         accessToken,
-        expiresIn,
+        accessTokenExpiresIn,
+        refreshTokenExpiresIn,
         id: user.id,
         email: user.email,
         name: user.name,
@@ -66,11 +67,11 @@ export class UserController {
 
     if (!user) return res.send({ accessToken: '' });
 
-    const { accessToken, refreshToken, expiresIn } = createTokens(user.id);
+    const { accessToken, refreshToken, accessTokenExpiresIn, refreshTokenExpiresIn } = createTokens(user.id);
 
     await this.userService.refreshToken(refreshToken, user.id);
 
-    return res.send({ accessToken, refreshToken, expiresIn });
+    return res.send({ accessToken, refreshToken, accessTokenExpiresIn, refreshTokenExpiresIn });
   }
 
   async logout(req: Request, res: Response) {
