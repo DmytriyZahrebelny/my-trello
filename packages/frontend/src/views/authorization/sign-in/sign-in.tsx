@@ -9,7 +9,7 @@ import { ROUTES } from '@core/constants';
 import { useSignInMutation } from '@core/api/api-authorization';
 import { setTokens } from '@core/services/auth-services';
 import { styles } from '../authorization.styles';
-import { validateSignInSchema } from './sign-in.helpers';
+import { validateSignInSchema } from './sign-in.services';
 
 interface FormValues {
   password: string;

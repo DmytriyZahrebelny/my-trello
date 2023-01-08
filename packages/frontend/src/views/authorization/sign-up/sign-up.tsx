@@ -7,7 +7,7 @@ import { TextField } from '@core/components/text-field';
 import { Password } from '@core/components/password';
 import { useSignUpMutation } from '@core/api/api-authorization';
 import { styles } from '../authorization.styles';
-import { validateSignUpSchema } from './sign-up.helpers';
+import { validateSignUpSchema } from './sign-up.services';
 
 export interface FormValues {
   name: string;
