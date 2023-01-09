@@ -5,7 +5,8 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 import { TextField } from '@core/components/text-field';
 import { Password } from '@core/components/password';
-import { ROUTES } from '@core/constants';
+import { QUERY_KEYS, ROUTES } from '@core/constants';
+import { client } from '@core/providers';
 import { useSignInMutation } from '@core/api/api-authorization';
 import { setTokens } from '@core/services/auth-services';
 import { styles } from '../authorization.styles';
@@ -25,6 +26,7 @@ export const SignIn = () => {
     mutate(values, {
       onSuccess({ data }) {
         setTokens(data);
+        client.invalidateQueries(QUERY_KEYS.user, { exact: true });
       },
       onError({ message }) {
         Notify.failure(message);
