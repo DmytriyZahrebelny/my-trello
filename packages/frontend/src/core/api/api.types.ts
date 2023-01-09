@@ -1,3 +1,9 @@
+export interface UserResponse {
+  id: string;
+  name: string;
+  email: string;
+}
+
 export interface SignUpParams {
   name: string;
   email: string;

@@ -1,9 +1,17 @@
 import { AxiosError, AxiosPromise } from 'axios';
-import { useMutation } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 
-import { axiosAuthInstance } from '../api';
+import { QUERY_KEYS } from '../../constants';
+import { axiosAuthInstance, axiosInstance } from '../api';
 import { ENDPOINTS } from '../api.constants';
-import { SignInParams, SignUpParams, SignInResponse, RefreshTokenResponse } from '../api.types';
+import type { UserResponse, SignInParams, SignUpParams, SignInResponse, RefreshTokenResponse } from '../api.types';
+
+export const FOUR_HOURS = 240 * 60 * 1000;
+
+export const getUser = async (): Promise<UserResponse> => {
+  const { data } = await axiosInstance.get<UserResponse>('/me');
+  return data;
+};
 
 export const signUp = <T>(body: T): Promise<Omit<SignUpParams, 'password'>> =>
   axiosAuthInstance.post(ENDPOINTS.singUp, body);
@@ -20,3 +28,5 @@ export const useSignUpMutation = () => {
 export const useSignInMutation = () => {
   return useMutation<{ data: SignInResponse }, AxiosError, SignInParams>(signIn);
 };
+
+export const useUser = () => useQuery<UserResponse, AxiosError>(QUERY_KEYS.user, getUser, { cacheTime: FOUR_HOURS });
