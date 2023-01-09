@@ -16,7 +16,7 @@ export class UserService {
   }
 
   async findByEmail(email: string): Promise<undefined | User> {
-    const { rows } = await pool.query<Omit<User, 'refreshToken'> & { refresh_token: string }>(
+    const { rows } = await pool.query<User & { refresh_token: string }>(
       `SELECT * FROM users WHERE users.email='${email}'`
     );
 
@@ -27,9 +27,14 @@ export class UserService {
     }
   }
 
-  async findById(id: string): Promise<undefined | User> {
-    const user = await pool.query<User>(`SELECT * FROM users WHERE users.id='${id}'`);
-    return user.rows[0];
+  async findById(id: string): Promise<undefined | Omit<User, 'refreshToken' | 'password'>> {
+    const { rows } = await pool.query<User & { refresh_token: string }>(`SELECT * FROM users WHERE users.id='${id}'`);
+
+    const [user] = rows;
+    if (user) {
+      const { email, name, id } = user;
+      return { email, name, id };
+    }
   }
 
   async findByToken(token: string): Promise<undefined | User> {
