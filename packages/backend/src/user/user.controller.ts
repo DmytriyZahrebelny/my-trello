@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 import { HTTP_CODE } from '../constants';
 import { createTokens } from '../lib/jwt';
@@ -16,10 +17,35 @@ export class UserController {
   }
 
   public intializeRoutes() {
+    this.router.get('/me', this.me.bind(this));
     this.router.post('/sign-up', userValidator(this.userService), this.signUp.bind(this));
     this.router.post('/sign-in', this.signIn.bind(this));
     this.router.post('/refresh-token', this.refreshToken.bind(this));
     this.router.put('/logout', this.logout.bind(this));
+  }
+
+  async me(req: Request, res: Response) {
+    const authorization = req.headers['authorization'];
+
+    if (!authorization) {
+      return res.sendStatus(HTTP_CODE.UNAUTHORIZED);
+    }
+
+    const [, token] = authorization.split(' ');
+
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET as string, async (err, data) => {
+      if (err) {
+        return res.sendStatus(HTTP_CODE.FORBIDDEN);
+      }
+
+      const user = await this.userService.findById((data as { userId: string })?.userId);
+
+      if (!user) {
+        return res.status(HTTP_CODE.UNAUTHORIZED).send({ meassage: 'Email or password are wrong' });
+      }
+
+      return res.status(HTTP_CODE.OK).send(user);
+    });
   }
 
   async signUp(req: Request, res: Response) {
