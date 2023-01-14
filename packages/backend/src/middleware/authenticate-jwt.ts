@@ -16,10 +16,12 @@ export const authenticateJwt = (req: Request, res: Response, next: NextFunction)
     return res.sendStatus(HTTP_CODE.UNAUTHORIZED);
   }
 
-  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET as string, (err) => {
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET as string, (err, data) => {
     if (err) {
       return res.sendStatus(HTTP_CODE.FORBIDDEN);
     }
+
+    res.locals.userId = (data as { userId: string })?.userId;
 
     next();
   });
