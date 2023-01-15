@@ -9,7 +9,7 @@ import type { UserResponse, SignInParams, SignUpParams, SignInResponse, RefreshT
 export const FOUR_HOURS = 240 * 60 * 1000;
 
 export const getUser = async (): Promise<UserResponse> => {
-  const { data } = await axiosInstance.get<UserResponse>('/me');
+  const { data } = await axiosInstance.get<UserResponse>(ENDPOINTS.me);
   return data;
 };
 
@@ -22,11 +22,12 @@ export const refreshToken = (token: string): AxiosPromise<RefreshTokenResponse> 
   axiosAuthInstance.post(ENDPOINTS.refreshToken, { refreshToken: token });
 
 export const useSignUpMutation = () => {
-  return useMutation<Omit<SignUpParams, 'password'>, AxiosError, SignUpParams>(signUp);
+  return useMutation<Omit<SignUpParams, 'password'>, AxiosError, SignUpParams>({ mutationFn: signUp });
 };
 
 export const useSignInMutation = () => {
-  return useMutation<{ data: SignInResponse }, AxiosError, SignInParams>(signIn);
+  return useMutation<{ data: SignInResponse }, AxiosError, SignInParams>({ mutationFn: signIn });
 };
 
-export const useUser = () => useQuery<UserResponse, AxiosError>(QUERY_KEYS.user, getUser, { cacheTime: FOUR_HOURS });
+export const useUser = () =>
+  useQuery<UserResponse, AxiosError>({ queryKey: QUERY_KEYS.user, queryFn: getUser, cacheTime: FOUR_HOURS });

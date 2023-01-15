@@ -27,3 +27,18 @@ export interface SignInResponse extends RefreshTokenResponse {
   email: string;
   name: string;
 }
+
+export interface WorkSpacesResponse {
+  workSpaceId: number;
+  name: string;
+}
+
+export interface CreateWorkSpaceParams {
+  name: string;
+}
+
+export interface DeleteWorkSpaceParams {
+  workSpaceId: string;
+}
+
+export interface UpdateWorkSpaceParams extends CreateWorkSpaceParams, DeleteWorkSpaceParams {}
