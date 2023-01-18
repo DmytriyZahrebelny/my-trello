@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 
 import { Authorization, SignIn, SignUp } from '@views/authorization';
-import { WorkSpaces } from '@views/work-spaces';
+import { Workspaces } from '@views/workspaces';
 import { useAuthContext } from '@core/providers';
 import { ROUTES } from '../constants';
 
@@ -10,7 +10,7 @@ export const Routing = () => {
 
   return isAuthorized ? (
     <Routes>
-      <Route path="/" element={<WorkSpaces />} />
+      <Route path="/" element={<Workspaces />} />
     </Routes>
   ) : (
     <Routes>
