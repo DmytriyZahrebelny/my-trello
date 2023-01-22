@@ -4,11 +4,14 @@ import { Authorization, SignIn, SignUp } from '@views/authorization';
 import { Workspaces } from '@views/workspaces';
 import { useAuthContext } from '@core/providers';
 import { ROUTES } from '../constants';
+import { Loading } from '../components/loading';
 
 export const Routing = () => {
-  const { isAuthorized } = useAuthContext();
+  const { isAuthorized, isLoading } = useAuthContext();
 
-  return isAuthorized ? (
+  return isLoading ? (
+    <Loading />
+  ) : isAuthorized ? (
     <Routes>
       <Route path="/" element={<Workspaces />} />
     </Routes>
