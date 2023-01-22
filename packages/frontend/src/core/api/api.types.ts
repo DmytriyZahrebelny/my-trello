@@ -29,7 +29,7 @@ export interface SignInResponse extends RefreshTokenResponse {
 }
 
 export interface WorkSpacesResponse {
-  workSpaceId: number;
+  id: number;
   name: string;
 }
 
@@ -38,7 +38,7 @@ export interface CreateWorkSpaceParams {
 }
 
 export interface DeleteWorkSpaceParams {
-  workSpaceId: string;
+  id: number;
 }
 
 export interface UpdateWorkSpaceParams extends CreateWorkSpaceParams, DeleteWorkSpaceParams {}

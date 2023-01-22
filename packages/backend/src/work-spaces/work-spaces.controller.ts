@@ -37,17 +37,17 @@ export class WorkSpacesController {
   }
 
   async updateWorkSpace(req: Request, res: Response) {
-    const { name, workSpaceId } = req.body;
+    const { name, id } = req.body;
 
-    const workSpace = await this.workSpacesService.updateByWorkSpaceId(workSpaceId, name);
+    const workSpace = await this.workSpacesService.updateByWorkSpaceId(id, name);
 
     res.status(HTTP_CODE.OK).send(workSpace);
   }
 
   async deleteWorkSpace(req: Request, res: Response) {
-    const { workSpaceId } = req.body;
+    const { id } = req.body;
 
-    await this.workSpacesService.deleteByWorkSpaceId(workSpaceId);
+    await this.workSpacesService.deleteByWorkSpaceId(id);
 
     res.status(HTTP_CODE.CREATED).send({ messasge: 'success' });
   }

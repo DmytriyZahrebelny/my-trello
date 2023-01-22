@@ -15,16 +15,14 @@ export class WorkSpacesService {
     return rows[0];
   }
 
-  async updateByWorkSpaceId(workSpaceId: string, name: string) {
-    const { rows } = await pool.query(
-      `UPDATE work_spaces set name='${name}' WHERE id='${workSpaceId}' RETURNING name, id`
-    );
+  async updateByWorkSpaceId(id: string, name: string) {
+    const { rows } = await pool.query(`UPDATE work_spaces set name='${name}' WHERE id='${id}' RETURNING name, id`);
 
     return rows[0];
   }
 
-  async deleteByWorkSpaceId(workSpaceId: string) {
-    const { rows } = await pool.query(`DELETE FROM work_spaces WHERE id='${workSpaceId}'`);
+  async deleteByWorkSpaceId(id: string) {
+    const { rows } = await pool.query(`DELETE FROM work_spaces WHERE id='${id}'`);
 
     return rows[0];
   }

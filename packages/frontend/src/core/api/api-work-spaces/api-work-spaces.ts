@@ -6,8 +6,9 @@ import { axiosInstance } from '../api';
 import { ENDPOINTS } from '../api.constants';
 import { WorkSpacesResponse, CreateWorkSpaceParams, UpdateWorkSpaceParams, DeleteWorkSpaceParams } from '../api.types';
 
-const getWorkSpaces = async (): Promise<WorkSpacesResponse> => {
-  const { data } = await axiosInstance.get<WorkSpacesResponse>(ENDPOINTS.workSpaces);
+const getWorkSpaces = async (): Promise<WorkSpacesResponse[]> => {
+  const { data } = await axiosInstance.get<WorkSpacesResponse[]>(ENDPOINTS.workSpaces);
+
   return data;
 };
 
@@ -28,7 +29,7 @@ const deleteWorkSpace = (body: DeleteWorkSpaceParams): Promise<string> => {
 };
 
 export const useWorkSpacesQuery = () =>
-  useQuery<WorkSpacesResponse, AxiosError>({
+  useQuery<WorkSpacesResponse[], AxiosError>({
     queryKey: QUERY_KEYS.workSpaces,
     queryFn: getWorkSpaces,
   });
