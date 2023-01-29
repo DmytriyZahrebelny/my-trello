@@ -24,7 +24,7 @@ module.exports = {
     new CleanWebpackPlugin({ cleanOnceBeforeBuildPatterns: ["dist"] }),
     new HtmlWebPackPlugin({
       filename: "index.html",
-      template: "./public/index.html",
+      template: path.resolve(__dirname, 'public/index.html'),
     }),
     new ESLintPlugin({ extensions: ["ts", "tsx"], emitWarning: false }),
     new ForkTsCheckerWebpackPlugin({ async: false }),
