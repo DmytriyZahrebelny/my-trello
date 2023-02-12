@@ -3,20 +3,22 @@ version: '3'
 services:
   ui_dev:
     build:
-      context: packages/frontend
+      context: .
+      dockerfile: apps/ui-react/Dockerfile
       args:
       - PORT=4000
       - NODE_ENV=development
     ports:
       - 4000:4000
     volumes:
-      - ./packages/frontend/:/usr/src/app
+      - ./:/usr/src/app
       - /usr/src/app/node_modules
-
+      - /usr/src/app/apps/ui-react/node_modules
+    command: pnpm run ui-react
 
   backend:
     build:
-      context: packages/backend
+      context: apps/backend
       args:
         - PORT=4000
         - NODE_ENV=production
@@ -26,7 +28,7 @@ services:
 
   backend_dev:
     build:
-      context: packages/backend
+      context: apps/backend
       args:
         - PORT=4000
         - NODE_ENV=development
@@ -37,7 +39,7 @@ services:
     env_file:
       - ./.env.development.local
     volumes:
-      - ./packages/backend/:/usr/src/app
+      - ./apps/backend/:/usr/src/app
       - /usr/src/app/node_modules
     command: pnpm start:dev
 
