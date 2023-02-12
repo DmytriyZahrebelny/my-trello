@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",
-    "check:format": "prettier --check ./packages/**/*.{ts,json}",
-    "format": "prettier --write ./packages/**/*.{ts,tsx,json}",
-    "server": "docker-compose up backend_dev"
+    "check:format": "prettier --check ./apps/**/*.{ts,json}",
+    "format": "prettier --write ./apps/**/*.{ts,tsx,json}",
+    "server": "docker-compose up backend_dev",
+    "ui-react": "pnpm --filter ui-react run start"
   },
   "keywords": [],
   "author": "",
@@ -19,7 +20,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.7.1",
-    "typescript": "^4.8.4"
+    "typescript": "^4.9.5"
   },
   "eslintConfig": {
     "parser": "@typescript-eslint/parser",
