@@ -16,9 +16,9 @@ services:
       - /usr/src/app/apps/ui-react/node_modules
     command: pnpm run ui-react
 
-  backend:
+  api:
     build:
-      context: apps/backend
+      context: apps/api-express
       args:
         - PORT=4000
         - NODE_ENV=production
@@ -26,9 +26,10 @@ services:
       - 8000:4000
     command: pnpm start
 
-  backend_dev:
+  api_dev:
     build:
-      context: apps/backend
+      context: .
+      dockerfile: apps/api-express/Dockerfile
       args:
         - PORT=4000
         - NODE_ENV=development
@@ -39,9 +40,9 @@ services:
     env_file:
       - ./.env.development.local
     volumes:
-      - ./apps/backend/:/usr/src/app
+      - ./:/usr/src/app
       - /usr/src/app/node_modules
-    command: pnpm start:dev
+    command: pnpm run api-express
 
   db:
     image: postgres

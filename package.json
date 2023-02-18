@@ -8,7 +8,8 @@
     "check:format": "prettier --check ./apps/**/*.{ts,json}",
     "format": "prettier --write ./apps/**/*.{ts,tsx,json}",
     "server": "docker-compose up backend_dev",
-    "ui-react": "pnpm --filter ui-react run start"
+    "ui-react": "pnpm --filter ui-react run start",
+    "api-express": "pnpm --filter api-express run start:dev"
   },
   "keywords": [],
   "author": "",
