@@ -1,8 +1,8 @@
 import express, { Request, Response } from 'express';
 
-import { HTTP_CODE } from '../constants';
+import { HTTP_CODE } from '../constants/index';
 import { WorkSpacesService } from './work-spaces.service';
-import { authenticateJwt } from '../middleware';
+import { authenticateJwt } from '../middleware/index';
 
 export class WorkSpacesController {
   public router = express.Router();

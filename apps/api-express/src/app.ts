@@ -4,7 +4,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 
 import { getLogger } from './lib/logger';
-import { loggerMiddleware } from './middleware';
+import { loggerMiddleware } from './middleware/index';
 import { Controllers } from './server';
 
 const logger = getLogger({ name: 'app' });
