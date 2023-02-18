@@ -1,19 +1,10 @@
 {
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "target": "ESNext",
     "module": "ESNext",
-    "lib": ["ESNext", "dom"],
-    "jsx": "react-jsx",
-    "sourceMap": true,
-    "strict": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "moduleResolution": "node",
-    "forceConsistentCasingInFileNames": true,
-    "esModuleInterop": true,
     "baseUrl": ".",
-    "skipLibCheck": true,
     "jsxImportSource": "@emotion/react",
+    "jsx": "react-jsx",
     "paths": {
       "@core/*": ["src/core/*"],
       "@views/*": ["src/views/*"]

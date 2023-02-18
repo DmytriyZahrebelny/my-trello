@@ -1,4 +1,4 @@
-import { AxiosHeaders, InternalAxiosRequestConfig } from 'axios';
+import type { InternalAxiosRequestConfig } from 'axios';
 
 import { getRefreshToken, getAccessToken, setTokens, clearTokens } from '../services/auth-services';
 import { refreshToken } from './api-authorization';
@@ -25,7 +25,7 @@ export const tokenInterceptors = async (config: InternalAxiosRequestConfig): Pro
         headers: {
           ...config.headers,
           Authorization: `Bearer ${response.data.accessToken}`,
-        } as unknown as AxiosHeaders,
+        } as unknown as InternalAxiosRequestConfig['headers'],
       };
     } catch {
       clearTokens();
@@ -38,6 +38,6 @@ export const tokenInterceptors = async (config: InternalAxiosRequestConfig): Pro
     headers: {
       ...config.headers,
       Authorization: `Bearer ${getAccessToken()}`,
-    } as unknown as AxiosHeaders,
+    } as unknown as InternalAxiosRequestConfig['headers'],
   };
 };
