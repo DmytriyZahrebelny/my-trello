@@ -1,6 +1,13 @@
 FROM node:19-bullseye
 WORKDIR /usr/src/app
-COPY ../../package.json ../../pnpm-lock.yaml ../../pnpm-workspace.yaml ../../.prettierrc ../../.prettierignore ../../.eslintignore /usr/src/app/
+COPY ../../package.json \
+     ../../pnpm-lock.yaml \
+     ../../pnpm-workspace.yaml \
+     ../../tsconfig.json \
+     ../../.prettierrc \
+     ../../.prettierignore \
+     ../../.eslintignore \
+     /usr/src/app/
 COPY package.json /usr/src/app/api-express/
 RUN npm install --global pnpm
 ENV PNPM_HOME=/usr/src/app
