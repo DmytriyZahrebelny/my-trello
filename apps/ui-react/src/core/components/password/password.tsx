@@ -11,6 +11,10 @@ interface Props {
 
 const passwordStyle = css`
   width: 100%;
+
+  .MuiSvgIcon-root {
+    color: #34a853;
+  }
 `;
 
 export const Password = ({ name, label = 'password' }: Props) => {
