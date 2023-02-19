@@ -1,8 +1,25 @@
 import { ReactNode } from 'react';
 import { ThemeProvider as MUIThemeProvider, createTheme } from '@mui/material/styles';
 import type { ThemeOptions } from '@mui/material/styles';
+import { useRecoilValue } from 'recoil';
 
 import { GlobalStyles } from '../components/global-styles';
+import { themeToggleState } from '@core/store/theme-toggle-state';
+
+interface Props {
+  children: ReactNode;
+}
+
+export const ThemeProvider = ({ children }: Props) => {
+  const theme = useRecoilValue(themeToggleState);
+
+  return (
+    <MUIThemeProvider theme={createTheme(theme === 'light' ? lightTheme : darkTheme)}>
+      {children}
+      <GlobalStyles />
+    </MUIThemeProvider>
+  );
+};
 
 export const lightTheme: ThemeOptions = {
   palette: {
@@ -14,10 +31,10 @@ export const lightTheme: ThemeOptions = {
     primary: {
       light: '#ffffff',
       main: '#34A853',
-      dark: '#388e3c',
+      dark: '#36373A',
     },
     secondary: {
-      light: '#2196f3',
+      light: '#FB8E2A',
       main: '#fff',
     },
     error: {
@@ -119,7 +136,7 @@ export const darkTheme: ThemeOptions = {
       contrastText: '#EDEDF2',
     },
     secondary: {
-      light: '#2196f3',
+      light: '#FB8E2A',
       main: '#fff',
     },
     error: {
@@ -218,22 +235,9 @@ export const darkTheme: ThemeOptions = {
     MuiSvgIcon: {
       styleOverrides: {
         root: {
-          color: '#718797',
+          color: '#ffffff',
         },
       },
     },
   },
-};
-
-interface Props {
-  children: ReactNode;
-}
-
-export const ThemeProvider = ({ children }: Props) => {
-  return (
-    <MUIThemeProvider theme={createTheme(lightTheme)}>
-      {children}
-      <GlobalStyles />
-    </MUIThemeProvider>
-  );
 };
