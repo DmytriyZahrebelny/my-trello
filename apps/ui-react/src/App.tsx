@@ -8,7 +8,9 @@ export const App = () => (
     <QueryProvider>
       <AuthProvider>
         <ThemeProvider>
-          <Routing />
+          <div>
+            <Routing />
+          </div>
         </ThemeProvider>
       </AuthProvider>
     </QueryProvider>

@@ -1,16 +1,19 @@
 import { ReactNode } from 'react';
 import { ThemeProvider as MUIThemeProvider, createTheme } from '@mui/material/styles';
-import { Global, css } from '@emotion/react';
+import type { ThemeOptions } from '@mui/material/styles';
 
-export const theme = createTheme({
+import { GlobalStyles } from '../components/global-styles';
+
+export const lightTheme: ThemeOptions = {
   palette: {
+    mode: 'light',
     common: {
       black: '#ed6c02',
-      white: '#4caf50',
+      white: '#34A853',
     },
     primary: {
       light: '#ffffff',
-      main: '#4caf50',
+      main: '#34A853',
       dark: '#388e3c',
     },
     secondary: {
@@ -29,8 +32,8 @@ export const theme = createTheme({
       disabled: 'rgba(55, 65, 81, 0.48)',
     },
     background: {
-      default: '#01579b',
-      paper: '#FFFFFF',
+      default: '#FFFFFF',
+      paper: '#EDEDF2',
     },
   },
   typography: {
@@ -51,7 +54,7 @@ export const theme = createTheme({
     MuiOutlinedInput: {
       styleOverrides: {
         notchedOutline: {
-          borderColor: '#4caf50',
+          borderColor: '#34A853',
         },
       },
     },
@@ -76,7 +79,7 @@ export const theme = createTheme({
         root: {
           paddingLeft: '24px',
           paddingRight: '24px',
-          backgroundColor: '#4caf50',
+          backgroundColor: '#34A853',
           color: '#FFFFFF',
 
           '&:hover': {
@@ -85,15 +88,142 @@ export const theme = createTheme({
         },
       },
     },
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          color: '#344449',
+        },
+      },
+    },
     MuiSvgIcon: {
       styleOverrides: {
         root: {
-          color: '#4caf50',
+          color: '#718797',
         },
       },
     },
   },
-});
+};
+
+export const darkTheme: ThemeOptions = {
+  palette: {
+    mode: 'dark',
+    common: {
+      black: '#ed6c02',
+      white: '#34A853',
+    },
+    primary: {
+      light: '#ffffff',
+      main: '#34A853',
+      dark: '#388e3c',
+      contrastText: '#EDEDF2',
+    },
+    secondary: {
+      light: '#2196f3',
+      main: '#fff',
+    },
+    error: {
+      main: '#D14343',
+      light: '#DA6868',
+      dark: '#922E2E',
+      contrastText: '#FFFFFF',
+    },
+    text: {
+      primary: '#121828',
+      secondary: '#65748B',
+      disabled: 'rgba(55, 65, 81, 0.48)',
+    },
+    background: {
+      default: '#313237',
+      paper: '#36373A',
+    },
+  },
+  typography: {
+    fontFamily: [
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
+  },
+  components: {
+    MuiInputBase: {
+      styleOverrides: {
+        input: {
+          '&:autofill': {
+            boxShadow: 'none !important',
+          },
+        },
+      },
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        notchedOutline: {
+          borderColor: '#34A853',
+        },
+      },
+    },
+    MuiFormLabel: {
+      styleOverrides: {
+        root: {
+          color: '#34A853',
+        },
+      },
+    },
+    MuiFormControl: {
+      styleOverrides: {
+        root: {
+          '& .MuiInputBase-root': {
+            '&:hover': {
+              '& .MuiOutlinedInput-notchedOutline': {
+                borderColor: '#388e3c',
+              },
+            },
+          },
+        },
+      },
+    },
+    MuiButton: {
+      defaultProps: {
+        disableElevation: true,
+      },
+      styleOverrides: {
+        root: {
+          paddingLeft: '24px',
+          paddingRight: '24px',
+          backgroundColor: 'inherit',
+          color: '#34A853',
+          border: '2px solid #34A853',
+
+          '&:hover': {
+            color: '#388e3c',
+            border: '2px solid #388e3c',
+          },
+        },
+      },
+    },
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          color: '#EDEDF2',
+        },
+      },
+    },
+    MuiSvgIcon: {
+      styleOverrides: {
+        root: {
+          color: '#718797',
+        },
+      },
+    },
+  },
+};
 
 interface Props {
   children: ReactNode;
@@ -101,16 +231,9 @@ interface Props {
 
 export const ThemeProvider = ({ children }: Props) => {
   return (
-    <MUIThemeProvider theme={theme}>
+    <MUIThemeProvider theme={createTheme(lightTheme)}>
       {children}
-      <Global
-        styles={css`
-          body {
-            margin: 0;
-            background: #f3f4f6;
-          }
-        `}
-      />
+      <GlobalStyles />
     </MUIThemeProvider>
   );
 };

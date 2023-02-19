@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { Theme } from '@mui/material/styles';
+import type { Theme } from '@mui/material/styles';
 
 export const styles = {
   container: (theme: Partial<Theme>) => css`
@@ -12,7 +12,7 @@ export const styles = {
     padding: ${theme.spacing?.(3)};
   `,
   avatar: (theme: Partial<Theme>) => css`
-    background: ${theme.palette?.background.default};
+    background: ${theme.palette?.primary.main};
 
     & svg {
       color: ${theme.palette?.primary.light};
@@ -35,7 +35,7 @@ export const styles = {
   links: (theme: Partial<Theme>) => css`
     display: flex;
     justify-content: space-between;
-    width: 100%;
+    width: 500px;
 
     & a {
       font-family: ${theme.typography?.fontFamily};
