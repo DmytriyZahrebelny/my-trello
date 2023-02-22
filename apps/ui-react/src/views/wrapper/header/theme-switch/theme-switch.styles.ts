@@ -6,7 +6,7 @@ export const styles = {
     cursor: pointer;
 
     svg {
-      color: ${theme.palette?.mode === 'dark' ? theme.palette?.secondary.light : theme.palette?.primary.dark};
+      color: ${theme.palette?.mode === 'dark' ? theme.palette?.common.white : theme.palette?.common.black};
     }
   `,
 };

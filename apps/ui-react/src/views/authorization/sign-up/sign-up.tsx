@@ -40,10 +40,10 @@ export const SignUp = () => {
       </Typography>
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)} css={styles.form}>
-          <TextField name="name" label="Name" />
-          <TextField name="email" label="Email" />
-          <Password name="password" label="Password" />
-          <Password name="repeatedPassword" label="Repeated password" />
+          <TextField name="name" label="Name" styles={styles.field} />
+          <TextField name="email" label="Email" styles={styles.field} />
+          <Password name="password" label="Password" styles={styles.field} />
+          <Password name="repeatedPassword" label="Repeated password" styles={styles.field} />
           <Button size="large" type="submit">
             Sign Up
           </Button>

@@ -12,10 +12,10 @@ export const styles = {
     padding: ${theme.spacing?.(3)};
   `,
   avatar: (theme: Partial<Theme>) => css`
-    background: ${theme.palette?.primary.main};
+    background: ${theme.palette?.secondary.main};
 
     & svg {
-      color: ${theme.palette?.primary.light};
+      color: ${theme.palette?.common.white};
     }
   `,
   title: css`
@@ -40,8 +40,39 @@ export const styles = {
     & a {
       font-family: ${theme.typography?.fontFamily};
       color: ${theme.palette?.secondary.light};
+    }
+  `,
+  field: (theme: Partial<Theme>) => css`
+    & .MuiOutlinedInput-notchedOutline {
+      border-color: ${theme.palette?.secondary.main};
+    }
 
-      &:visited: {
+    & .MuiInputBase-root {
+      & .MuiInputBase-input {
+        color: ${theme.palette?.text.primary};
+      }
+
+      &:focus,
+      &:hover {
+        & .MuiOutlinedInput-notchedOutline {
+          border-color: ${theme.palette?.secondary.dark};
+        }
+      }
+    }
+
+    & .MuiOutlinedInput-root.Mui-focused {
+      & .MuiOutlinedInput-notchedOutline {
+        border-color: ${theme.palette?.secondary.dark};
+      }
+    }
+
+    & .MuiFormLabel-root.Mui-focused {
+      color: ${theme.palette?.text.primary};
+    }
+
+    .Mui-error {
+      svg {
+        color: ${theme.palette?.error.main};
       }
     }
   `,
