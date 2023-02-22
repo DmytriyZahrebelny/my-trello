@@ -14,7 +14,7 @@ export const styles = {
     font-weight: bold;
     text-align: center;
     background: ${theme.palette?.common.white};
-    color: ${theme.palette?.primary.light};
+    color: ${theme.palette?.common.white};
     border-radius: 2px;
   `,
 };

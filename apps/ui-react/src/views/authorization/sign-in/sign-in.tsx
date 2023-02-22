@@ -41,8 +41,8 @@ export const SignIn = () => {
       </Typography>
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)} css={styles.form}>
-          <TextField name="email" label="Email" />
-          <Password name="password" label="Password" />
+          <TextField name="email" label="Email" styles={styles.field} />
+          <Password name="password" label="Password" styles={styles.field} />
           <Button size="large" type="submit">
             Sign In
           </Button>

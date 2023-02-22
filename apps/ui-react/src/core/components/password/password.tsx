@@ -1,12 +1,15 @@
 import { useState } from 'react';
 import { useFormContext, useController } from 'react-hook-form';
 import { FormControl, OutlinedInput, InputLabel, InputAdornment, IconButton, FormHelperText } from '@mui/material';
+import type { Theme } from '@mui/material/styles';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { css } from '@emotion/react';
+import type { SerializedStyles } from '@emotion/react';
 
 interface Props {
   name: string;
   label?: string;
+  styles?: (theme: Partial<Theme>) => SerializedStyles;
 }
 
 const passwordStyle = css`
@@ -17,7 +20,7 @@ const passwordStyle = css`
   }
 `;
 
-export const Password = ({ name, label = 'password' }: Props) => {
+export const Password = ({ name, label = 'password', styles }: Props) => {
   const { control } = useFormContext();
   const { field, fieldState } = useController({ control, name });
   const [showPassword, setShowPassword] = useState(false);
@@ -27,7 +30,7 @@ export const Password = ({ name, label = 'password' }: Props) => {
   };
 
   return (
-    <FormControl error={Boolean(fieldState.error?.message)} variant="outlined" css={passwordStyle}>
+    <FormControl error={Boolean(fieldState.error?.message)} variant="outlined" css={[passwordStyle, styles]}>
       <InputLabel htmlFor={name}>{label}</InputLabel>
       <OutlinedInput
         {...field}

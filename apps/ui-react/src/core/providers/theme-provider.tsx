@@ -25,28 +25,20 @@ export const lightTheme: ThemeOptions = {
   palette: {
     mode: 'light',
     common: {
-      black: '#ed6c02',
-      white: '#34A853',
+      black: '#404144',
+      white: '#ffffff',
     },
     primary: {
-      light: '#ffffff',
-      main: '#34A853',
-      dark: '#36373A',
+      main: '#EDEDF2',
+      dark: '#E8EAEE',
     },
     secondary: {
-      light: '#FB8E2A',
-      main: '#fff',
-    },
-    error: {
-      main: '#D14343',
-      light: '#DA6868',
-      dark: '#922E2E',
-      contrastText: '#FFFFFF',
+      light: '#4caf50',
+      main: '#34A853',
+      dark: '#388e3c',
     },
     text: {
-      primary: '#121828',
-      secondary: '#65748B',
-      disabled: 'rgba(55, 65, 81, 0.48)',
+      primary: '#344449',
     },
     background: {
       default: '#FFFFFF',
@@ -68,22 +60,14 @@ export const lightTheme: ThemeOptions = {
     ].join(','),
   },
   components: {
-    MuiOutlinedInput: {
-      styleOverrides: {
-        notchedOutline: {
-          borderColor: '#34A853',
-        },
-      },
-    },
-    MuiFormControl: {
+    MuiInputBase: {
       styleOverrides: {
         root: {
-          '& .MuiInputBase-root': {
-            '&:hover': {
-              '& .MuiOutlinedInput-notchedOutline': {
-                borderColor: '#388e3c',
-              },
-            },
+          width: '100%',
+        },
+        input: {
+          '&:autofill': {
+            boxShadow: 'none !important',
           },
         },
       },
@@ -126,29 +110,20 @@ export const darkTheme: ThemeOptions = {
   palette: {
     mode: 'dark',
     common: {
-      black: '#ed6c02',
-      white: '#34A853',
+      black: '#404144',
+      white: '#ffffff',
     },
     primary: {
-      light: '#ffffff',
-      main: '#34A853',
-      dark: '#388e3c',
-      contrastText: '#EDEDF2',
+      main: '#404144',
+      dark: '#36373A',
     },
     secondary: {
-      light: '#FB8E2A',
-      main: '#fff',
-    },
-    error: {
-      main: '#D14343',
-      light: '#DA6868',
-      dark: '#922E2E',
-      contrastText: '#FFFFFF',
+      light: '#4caf50',
+      main: '#34A853',
+      dark: '#388e3c',
     },
     text: {
-      primary: '#121828',
-      secondary: '#65748B',
-      disabled: 'rgba(55, 65, 81, 0.48)',
+      primary: '#EDEDF2',
     },
     background: {
       default: '#313237',
@@ -172,36 +147,12 @@ export const darkTheme: ThemeOptions = {
   components: {
     MuiInputBase: {
       styleOverrides: {
+        root: {
+          width: '100%',
+        },
         input: {
           '&:autofill': {
             boxShadow: 'none !important',
-          },
-        },
-      },
-    },
-    MuiOutlinedInput: {
-      styleOverrides: {
-        notchedOutline: {
-          borderColor: '#34A853',
-        },
-      },
-    },
-    MuiFormLabel: {
-      styleOverrides: {
-        root: {
-          color: '#34A853',
-        },
-      },
-    },
-    MuiFormControl: {
-      styleOverrides: {
-        root: {
-          '& .MuiInputBase-root': {
-            '&:hover': {
-              '& .MuiOutlinedInput-notchedOutline': {
-                borderColor: '#388e3c',
-              },
-            },
           },
         },
       },
