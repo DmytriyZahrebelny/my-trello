@@ -6,6 +6,9 @@ export const styles = {
     cursor: pointer;
 
     svg {
+      display: flex;
+      width: 28px;
+      height: 28px;
       color: ${theme.palette?.mode === 'dark' ? theme.palette?.common.white : theme.palette?.common.black};
     }
   `,

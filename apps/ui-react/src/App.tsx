@@ -2,6 +2,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 
 import { Routing } from '@core/routing';
+import { Main } from '@core/layouts/main';
 import { ThemeProvider, QueryProvider, AuthProvider } from '@core/providers';
 
 export const App = () => (
@@ -10,9 +11,9 @@ export const App = () => (
       <QueryProvider>
         <AuthProvider>
           <ThemeProvider>
-            <div>
+            <Main>
               <Routing />
-            </div>
+            </Main>
           </ThemeProvider>
         </AuthProvider>
       </QueryProvider>

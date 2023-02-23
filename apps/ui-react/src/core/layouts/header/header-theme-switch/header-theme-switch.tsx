@@ -3,9 +3,9 @@ import Brightness3Icon from '@mui/icons-material/Brightness3';
 import { useRecoilState } from 'recoil';
 
 import { themeToggleState } from '@core/store/theme-toggle-state';
-import { styles } from './theme-switch.styles';
+import { styles } from './header-theme-switch.styles';
 
-export const ThemeSwitch = () => {
+export const HeaderThemeSwitch = () => {
   const [theme, setTheme] = useRecoilState(themeToggleState);
 
   const onIconClick = () => {

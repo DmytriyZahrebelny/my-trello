@@ -13,13 +13,16 @@ export const getUser = async (): Promise<UserResponse> => {
   return data;
 };
 
+export const refreshToken = (token: string): AxiosPromise<RefreshTokenResponse> =>
+  axiosAuthInstance.post(ENDPOINTS.refreshToken, { refreshToken: token });
+
 export const signUp = <T>(body: T): Promise<Omit<SignUpParams, 'password'>> =>
   axiosAuthInstance.post(ENDPOINTS.singUp, body);
 
 export const signIn = <T>(body: T): AxiosPromise<SignInResponse> => axiosAuthInstance.post(ENDPOINTS.signIn, body);
 
-export const refreshToken = (token: string): AxiosPromise<RefreshTokenResponse> =>
-  axiosAuthInstance.post(ENDPOINTS.refreshToken, { refreshToken: token });
+export const logOut = <T>(userId: T): Promise<{ message: string }> =>
+  axiosAuthInstance.put(ENDPOINTS.logOut, { userId });
 
 export const useSignUpMutation = () => {
   return useMutation<Omit<SignUpParams, 'password'>, AxiosError, SignUpParams>({ mutationFn: signUp });
@@ -27,6 +30,10 @@ export const useSignUpMutation = () => {
 
 export const useSignInMutation = () => {
   return useMutation<{ data: SignInResponse }, AxiosError, SignInParams>({ mutationFn: signIn });
+};
+
+export const useLogOutMutation = () => {
+  return useMutation<{ message: string }, AxiosError, string>({ mutationFn: logOut });
 };
 
 export const useUser = () =>

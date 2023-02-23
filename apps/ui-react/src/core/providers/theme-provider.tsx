@@ -3,8 +3,8 @@ import { ThemeProvider as MUIThemeProvider, createTheme } from '@mui/material/st
 import type { ThemeOptions } from '@mui/material/styles';
 import { useRecoilValue } from 'recoil';
 
-import { GlobalStyles } from '../components/global-styles';
 import { themeToggleState } from '@core/store/theme-toggle-state';
+import { GlobalStyles } from '../components/global-styles';
 
 interface Props {
   children: ReactNode;
@@ -29,8 +29,9 @@ export const lightTheme: ThemeOptions = {
       white: '#ffffff',
     },
     primary: {
-      main: '#EDEDF2',
-      dark: '#E8EAEE',
+      light: '#EDEDF2',
+      main: '#E8EAEE',
+      dark: '#B6C7D5',
     },
     secondary: {
       light: '#4caf50',
