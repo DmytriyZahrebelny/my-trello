@@ -40,4 +40,30 @@ export const styles = {
       }
     }
   `,
+  rightContent: (theme: Partial<Theme>) => css`
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    gap: 0 ${theme.spacing?.(4)};
+  `,
+  avatar: (theme: Partial<Theme>) => css`
+    background-color: ${theme.palette?.secondary.main};
+    cursor: pointer;
+  `,
+  popover: (theme: Partial<Theme>) => css`
+    & .MuiPaper-root {
+      width: 180px;
+      padding: ${theme.spacing?.(1, 1)};
+      background-color: ${theme.palette?.primary.main};
+    }
+  `,
+  popoverItem: (theme: Partial<Theme>) => css`
+    padding: ${theme.spacing?.(1, 1)};
+    border-radius: 2px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: ${theme.palette?.primary.light};
+    }
+  `,
 };
