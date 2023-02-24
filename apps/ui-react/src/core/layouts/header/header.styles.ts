@@ -6,6 +6,8 @@ export const styles = {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: calc(100% - 60px);
+    margin: 0 0 0 auto;
     padding: ${theme.spacing?.(3)};
   `,
   leftContent: css`
@@ -13,8 +15,10 @@ export const styles = {
     justify-content: space-between;
     align-items: center;
     width: 700px;
+    height: 56px;
   `,
-  logo: css`
+  logo: (theme: Partial<Theme>) => css`
+    padding: ${theme.spacing?.(2, 0)};
     text-transform: uppercase;
     font-weight: 700;
   `,
@@ -45,6 +49,16 @@ export const styles = {
     justify-content: right;
     align-items: center;
     gap: 0 ${theme.spacing?.(4)};
+  `,
+  themeSwitch: (theme: Partial<Theme>) => css`
+    cursor: pointer;
+
+    svg {
+      display: flex;
+      width: 28px;
+      height: 28px;
+      color: ${theme.palette?.warning.light};
+    }
   `,
   avatar: (theme: Partial<Theme>) => css`
     background-color: ${theme.palette?.secondary.main};

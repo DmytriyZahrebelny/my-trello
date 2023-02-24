@@ -2,7 +2,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 
 import { Routing } from '@core/routing';
-import { Main } from '@core/layouts/main';
+import { AppPageWrapper } from '@core/components/app-page-wrapper';
 import { ThemeProvider, QueryProvider, AuthProvider } from '@core/providers';
 
 export const App = () => (
@@ -11,9 +11,9 @@ export const App = () => (
       <QueryProvider>
         <AuthProvider>
           <ThemeProvider>
-            <Main>
+            <AppPageWrapper>
               <Routing />
-            </Main>
+            </AppPageWrapper>
           </ThemeProvider>
         </AuthProvider>
       </QueryProvider>
