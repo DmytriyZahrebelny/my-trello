@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 import { HTTP_CODE } from '../../common/constants/index';
-import { createTokens } from '../../lib/jwt';
+import { createTokens } from '../../utils/jwt';
 import { UserService } from './user.service';
 import { userValidator } from './user.middleware';
 import { LoginParams } from './user.types';
