@@ -3,8 +3,8 @@ import type { Application } from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 
-import { getLogger } from './lib/logger';
-import { loggerMiddleware } from './middleware/index';
+import { getLogger } from './common/logger';
+import { loggerMiddleware } from './common/middleware/index';
 import { Controllers } from './server';
 
 const logger = getLogger({ name: 'app' });

@@ -1,7 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express';
 
-import { pool } from '../lib/db';
-import { authenticateJwt } from '../middleware/index';
+import { pool } from '../../utils/db';
+import { authenticateJwt } from '../../common/middleware/index';
 
 export class BoardsController {
   public router = express.Router();
