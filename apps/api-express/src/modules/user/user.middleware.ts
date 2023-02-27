@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import * as yup from 'yup';
 
-import { HTTP_CODE } from '../constants/common';
+import { HTTP_CODE } from '../../common/constants/common';
 import { UserService } from './user.service';
 
 const schema = yup.object().shape({

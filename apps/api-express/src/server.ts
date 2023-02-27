@@ -1,7 +1,7 @@
 import { App } from './app';
-import { BoardsController } from './boards/boards.controller';
-import { UserController, UserService } from './user/index';
-import { WorkSpacesController, WorkSpacesService } from './work-spaces/index';
+import { BoardsController } from './modules/boards/boards.controller';
+import { UserController, UserService } from './modules/user/index';
+import { WorkSpacesController, WorkSpacesService } from './modules/work-spaces/index';
 
 const PORT = Number(process.env.PORT);
 const controllers = [
