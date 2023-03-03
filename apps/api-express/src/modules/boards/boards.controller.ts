@@ -1,12 +1,13 @@
 import express, { Request, Response, NextFunction } from 'express';
 
-import { pool } from '../../utils/db';
 import { authenticateJwt } from '../../common/middleware/index';
+import { BoardsService } from './boards.services';
 
 export class BoardsController {
   public router = express.Router();
 
-  constructor() {
+  constructor(private readonly boardsService: BoardsService) {
+    this.boardsService = boardsService;
     this.intializeRoutes();
   }
 
@@ -16,16 +17,17 @@ export class BoardsController {
   }
 
   async getBoards(req: Request, res: Response): Promise<void> {
-    const data = await pool.query('SELECT * FROM boards');
+    const data = await this.boardsService.finlAll();
+
     res.status(200);
-    res.send(data.rows);
+    res.send(data);
   }
 
   async createBoard(req: Request, res: Response, next: NextFunction): Promise<void> {
     const { name }: { name: string } = await req.body;
 
     try {
-      const result = await pool.query(`INSERT INTO boards (name) VALUES ('${name}')`);
+      const result = await this.boardsService.create(name);
       res.send(result);
     } catch (error) {
       next(error);

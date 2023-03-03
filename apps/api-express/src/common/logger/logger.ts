@@ -7,7 +7,7 @@ const Env = {
 const LOG_FILE = `./api.log`;
 
 const isDevMode = process.env.NODE_ENV === Env.DEVELOPMENT;
-const defaultLogLevel = isDevMode ? `error` : `info`;
+const defaultLogLevel = isDevMode ? `info` : `error`;
 
 const logger = pino(
   {

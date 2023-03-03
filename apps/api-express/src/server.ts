@@ -1,13 +1,13 @@
 import { App } from './app';
-import { BoardsController } from './modules/boards/boards.controller';
-import { UserController, UserService } from './modules/user/index';
-import { WorkSpacesController, WorkSpacesService } from './modules/work-spaces/index';
+import { BoardsController, BoardsService } from './modules/boards';
+import { UserController, UserService } from './modules/user';
+import { WorkSpacesController, WorkSpacesService } from './modules/work-spaces';
 
 const PORT = Number(process.env.PORT);
 const controllers = [
   new UserController(new UserService()),
   new WorkSpacesController(new WorkSpacesService()),
-  new BoardsController(),
+  new BoardsController(new BoardsService()),
 ];
 
 export type Controllers = typeof controllers;
