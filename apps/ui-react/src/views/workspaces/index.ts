@@ -1,1 +1,1 @@
-export * from './workspaces';
+export * from './workspaces-loadable';

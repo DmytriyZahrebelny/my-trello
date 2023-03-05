@@ -5,6 +5,7 @@ import { Workspaces } from '@views/workspaces';
 import { useAuthContext } from '@core/providers';
 import { ROUTES } from '../constants';
 import { Loading } from '../components/loading';
+import { Suspense } from 'react';
 
 export const Routing = () => {
   const { isAuthorized, isLoading } = useAuthContext();
@@ -12,15 +13,19 @@ export const Routing = () => {
   return isLoading ? (
     <Loading />
   ) : isAuthorized ? (
-    <Routes>
-      <Route path="/" element={<Workspaces />} />
-    </Routes>
+    <Suspense fallback={<Loading />}>
+      <Routes>
+        <Route path="/" element={<Workspaces />} />
+      </Routes>
+    </Suspense>
   ) : (
-    <Routes>
-      <Route path="/" element={<Authorization />}>
-        <Route path="/" element={<SignIn />} />
-        <Route path={ROUTES.signUp} element={<SignUp />} />
-      </Route>
-    </Routes>
+    <Suspense fallback={<Loading />}>
+      <Routes>
+        <Route path="/" element={<Authorization />}>
+          <Route path="/" element={<SignIn />} />
+          <Route path={ROUTES.signUp} element={<SignUp />} />
+        </Route>
+      </Routes>
+    </Suspense>
   );
 };
