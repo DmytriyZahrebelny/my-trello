@@ -6,8 +6,9 @@ module.exports = merge(common, {
   mode: "development",
   devtool: "source-map",
   output: {
+    filename: '[name].bundle.js',
+    chunkFilename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
   },
   devServer: {
     open: true,
