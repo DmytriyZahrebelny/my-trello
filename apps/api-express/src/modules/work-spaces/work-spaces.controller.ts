@@ -1,8 +1,10 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 
 import { HTTP_CODE } from '../../common/constants/index';
 import { WorkSpacesService } from './work-spaces.service';
 import { authenticateJwt } from '../../common/middleware/index';
+import { Response, Request } from '../../common/types';
+import { CreateWorkspaceDto, UpdateWorkspaceDto, DeleteWorkspaceDto } from './dto';
 
 export class WorkSpacesController {
   public router = express.Router();
@@ -27,7 +29,7 @@ export class WorkSpacesController {
     res.status(HTTP_CODE.OK).send(workSpaces);
   }
 
-  async createWorkSpace(req: Request, res: Response) {
+  async createWorkSpace(req: Request<CreateWorkspaceDto>, res: Response) {
     const { name } = req.body;
     const userId = res.locals.userId;
 
@@ -36,7 +38,7 @@ export class WorkSpacesController {
     res.status(HTTP_CODE.CREATED).send(workSpace);
   }
 
-  async updateWorkSpace(req: Request, res: Response) {
+  async updateWorkSpace(req: Request<UpdateWorkspaceDto>, res: Response) {
     const { name, id } = req.body;
 
     const workSpace = await this.workSpacesService.updateByWorkSpaceId(id, name);
@@ -44,7 +46,7 @@ export class WorkSpacesController {
     res.status(HTTP_CODE.OK).send(workSpace);
   }
 
-  async deleteWorkSpace(req: Request, res: Response) {
+  async deleteWorkSpace(req: Request<DeleteWorkspaceDto>, res: Response) {
     const { id } = req.body;
 
     await this.workSpacesService.deleteByWorkSpaceId(id);

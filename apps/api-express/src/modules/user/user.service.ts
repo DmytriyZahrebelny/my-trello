@@ -1,12 +1,13 @@
 import bcrypt from 'bcrypt';
 
 import { db } from '../../common/database';
-import { RegisterParams, User } from './user.types';
+import { User } from './user.types';
+import { SignUpDto } from './dto';
 
 export class UserService {
   private pool = db;
 
-  async create({ name, email, password }: RegisterParams): Promise<Omit<User, 'password'>> {
+  async create({ name, email, password }: SignUpDto): Promise<Omit<User, 'password'>> {
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(password, salt);
 

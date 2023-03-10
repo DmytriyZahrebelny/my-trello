@@ -10,7 +10,7 @@ export const Authorization = () => (
     <Avatar css={styles.avatar}>
       <LockOutlinedIcon />
     </Avatar>
-    <Suspense fallback={'loading..'}>
+    <Suspense>
       <Outlet />
     </Suspense>
   </div>
