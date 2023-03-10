@@ -4,14 +4,14 @@ export class WorkSpacesService {
   private pool = db;
 
   async findAll(userId: string) {
-    const { rows } = await this.pool.query(`SELECT name, id FROM work_spaces WHERE owner_id='${userId}'`);
+    const { rows } = await this.pool.query(`SELECT * FROM work_spaces WHERE user_id='${userId}'`);
 
     return rows;
   }
 
   async create(userId: string, name: string) {
     const { rows } = await this.pool.query(
-      `INSERT INTO work_spaces (name, owner_id) VALUES ('${name}', '${userId}') RETURNING name, id`
+      `INSERT INTO work_spaces (name, user_id) VALUES ('${name}', '${userId}') RETURNING name, id`
     );
 
     return rows[0];

@@ -16,7 +16,7 @@ CREATE TABLE boards (
 CREATE TABLE work_spaces (
   id SERIAL PRIMARY KEY,
   name character varying(124) NOT NULL,
-  owner_id UUID,
-  FOREIGN KEY (owner_id) REFERENCES users (id)
+  user_id UUID,
+  FOREIGN KEY (user_id) REFERENCES users (id)
     ON DELETE SET NULL
 );

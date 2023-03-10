@@ -1,12 +1,13 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 import { HTTP_CODE } from '../../common/constants/index';
 import { createTokens } from '../../utils/jwt';
+import { Response, Request } from '../../common/types';
 import { UserService } from './user.service';
 import { userValidator } from './user.middleware';
-import { LoginParams } from './user.types';
+import { SignUpDto, SignInDto, RefreshTokenDto, LogoutDto } from './dto';
 
 export class UserController {
   public router = express.Router();
@@ -48,14 +49,14 @@ export class UserController {
     });
   }
 
-  async signUp(req: Request, res: Response) {
+  async signUp(req: Request<SignUpDto>, res: Response) {
     const user = await this.userService.create(req.body);
 
     res.status(HTTP_CODE.CREATED).json(user);
   }
 
-  async signIn(req: Request, res: Response) {
-    const { email, password }: LoginParams = req.body;
+  async signIn(req: Request<SignInDto>, res: Response) {
+    const { email, password } = req.body;
 
     const user = await this.userService.findByEmail(email);
 
@@ -84,8 +85,8 @@ export class UserController {
     }
   }
 
-  async refreshToken(req: Request, res: Response) {
-    const { refreshToken: token }: { refreshToken: string } = req.body;
+  async refreshToken(req: Request<RefreshTokenDto>, res: Response) {
+    const { refreshToken: token } = req.body;
 
     if (!token) return res.send({ accessToken: '' });
 
@@ -100,10 +101,10 @@ export class UserController {
     return res.send({ accessToken, refreshToken, accessTokenExpiresIn, refreshTokenExpiresIn });
   }
 
-  async logout(req: Request, res: Response) {
+  async logout(req: Request<LogoutDto>, res: Response) {
     const { userId } = req.body;
 
-    await this.userService.removeRefreshToken(userId as string);
+    await this.userService.removeRefreshToken(userId);
 
     return res.send({ message: 'Logged out' });
   }
