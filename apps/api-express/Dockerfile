@@ -7,6 +7,7 @@ COPY ../../package.json \
      ../../.prettierrc \
      ../../.prettierignore \
      ../../.eslintignore \
+     ../../packages \
      /usr/src/app/
 COPY package.json /usr/src/app/api-express/
 RUN npm install --global pnpm
@@ -22,7 +23,7 @@ ARG PORT
 ENV PORT ${PORT}
 EXPOSE ${PORT}
 RUN if [ "$NODE_ENV" = "development" ]; \
-        then pnpm install; \
+        then pnpm install --frozen-lockfile; \
         else pnpm install --prod; \
         fi
 CMD [ "pnpm", "run", "start:dev" ]
