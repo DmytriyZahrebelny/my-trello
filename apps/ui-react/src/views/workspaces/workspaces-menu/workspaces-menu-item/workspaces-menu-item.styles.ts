@@ -13,7 +13,7 @@ export const styles = {
     font-size: 20px;
     font-weight: bold;
     text-align: center;
-    background: ${theme.palette?.common.white};
+    background: ${theme.palette?.secondary.main};
     color: ${theme.palette?.common.white};
     border-radius: 2px;
   `,
