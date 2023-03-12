@@ -1,3 +1,4 @@
 packages:
 - "apps/api-express/**"
 - "apps/ui-react/**"
+- "packages/types/**"

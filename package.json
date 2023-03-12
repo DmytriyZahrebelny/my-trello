@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "private": true,
   "scripts": {
     "lint": "eslint .",
     "check:format": "prettier --check ./apps/**/*.{ts,json}",
@@ -45,5 +46,8 @@
       "no-unused-vars": "off",
       "@typescript-eslint/no-unused-vars": "error"
     }
+  },
+  "dependencies": {
+    "@shared/types": "workspace:*"
   }
 }
