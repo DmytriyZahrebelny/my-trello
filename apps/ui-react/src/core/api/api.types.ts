@@ -1,9 +1,3 @@
-export interface UserResponse {
-  id: string;
-  name: string;
-  email: string;
-}
-
 export interface SignUpParams {
   name: string;
   email: string;
@@ -20,17 +14,6 @@ export interface RefreshTokenResponse {
   accessToken: string;
   accessTokenExpiresIn: number;
   refreshTokenExpiresIn: number;
-}
-
-export interface SignInResponse extends RefreshTokenResponse {
-  id: string;
-  email: string;
-  name: string;
-}
-
-export interface WorkSpacesResponse {
-  id: number;
-  name: string;
 }
 
 export interface CreateWorkSpaceParams {

@@ -5,7 +5,7 @@ import cors from 'cors';
 
 import { getLogger } from './common/logger';
 import { loggerMiddleware } from './common/middleware/index';
-import { Controllers } from './server';
+import type { Controllers } from './server';
 
 const logger = getLogger({ name: 'app' });
 

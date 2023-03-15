@@ -2,9 +2,9 @@ import express from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
+import type { Response, Request } from '../../common/types';
 import { HTTP_CODE } from '../../common/constants/index';
 import { createTokens } from '../../utils/jwt';
-import { Response, Request } from '../../common/types';
 import { UserService } from './user.service';
 import { userValidator } from './user.middleware';
 import { SignUpDto, SignInDto, RefreshTokenDto, LogoutDto } from './dto';

@@ -1,27 +1,25 @@
 import bcrypt from 'bcrypt';
 
 import { db } from '../../common/database';
-import { User } from './user.types';
 import { SignUpDto } from './dto';
+import type { RefreshTokenDB, RefreshToken, User } from './user.types';
 
 export class UserService {
   private pool = db;
 
-  async create({ name, email, password }: SignUpDto): Promise<Omit<User, 'password'>> {
+  async create({ name, email, password }: SignUpDto): Promise<User> {
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(password, salt);
 
-    const result = await this.pool.query<Omit<User, 'password'>>(
+    const { rows } = await this.pool.query<User>(
       `INSERT INTO users (name, email, password) VALUES ('${name}', '${email}', '${hashPassword}') RETURNING name, email, id`
     );
 
-    return result.rows[0];
+    return rows[0];
   }
 
-  async findByEmail(email: string): Promise<undefined | User> {
-    const { rows } = await this.pool.query<User & { refresh_token: string }>(
-      `SELECT * FROM users WHERE users.email='${email}'`
-    );
+  async findByEmail(email: string): Promise<undefined | (User & RefreshToken)> {
+    const { rows } = await this.pool.query<User & RefreshTokenDB>(`SELECT * FROM users WHERE users.email='${email}'`);
 
     const [user] = rows;
     if (user) {
@@ -30,16 +28,10 @@ export class UserService {
     }
   }
 
-  async findById(id: string): Promise<undefined | Omit<User, 'refreshToken' | 'password'>> {
-    const { rows } = await this.pool.query<User & { refresh_token: string }>(
-      `SELECT * FROM users WHERE users.id='${id}'`
-    );
+  async findById(id: string): Promise<undefined | User> {
+    const { rows } = await this.pool.query<User & RefreshTokenDB>(`SELECT * FROM users WHERE users.id='${id}'`);
 
-    const [user] = rows;
-    if (user) {
-      const { email, name, id } = user;
-      return { email, name, id };
-    }
+    return rows[0];
   }
 
   async findByToken(token: string): Promise<undefined | User> {
