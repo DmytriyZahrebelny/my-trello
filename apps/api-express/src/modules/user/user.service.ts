@@ -1,8 +1,8 @@
 import bcrypt from 'bcrypt';
 
 import { db } from '../../common/database';
-import { RefreshTokenDB, RefreshToken, User } from './user.types';
 import { SignUpDto } from './dto';
+import type { RefreshTokenDB, RefreshToken, User } from './user.types';
 
 export class UserService {
   private pool = db;

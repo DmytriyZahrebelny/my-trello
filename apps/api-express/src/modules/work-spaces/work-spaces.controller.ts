@@ -1,9 +1,9 @@
 import express from 'express';
 
-import { HTTP_CODE } from '../../common/constants/index';
+import type { Response, Request } from '../../common/types';
+import { HTTP_CODE } from '../../common/constants';
+import { authenticateJwt } from '../../common/middleware';
 import { WorkSpacesService } from './work-spaces.service';
-import { authenticateJwt } from '../../common/middleware/index';
-import { Response, Request } from '../../common/types';
 import { CreateWorkspaceDto, UpdateWorkspaceDto, DeleteWorkspaceDto } from './dto';
 
 export class WorkSpacesController {

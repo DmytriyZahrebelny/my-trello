@@ -1,4 +1,4 @@
-import { Workspace } from '@shared/types';
+import type { Workspace } from '@shared/types';
 
 import { db } from '../../common/database';
 
