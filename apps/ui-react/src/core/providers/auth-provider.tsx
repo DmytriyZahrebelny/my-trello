@@ -1,8 +1,8 @@
 import { createContext, useContext } from 'react';
 import type { ReactNode } from 'react';
+import type { User } from '@shared/types';
 
 import { useUser } from '@core/api/api-authorization';
-import type { UserResponse } from '@core/api/api.types';
 
 interface Props {
   children: ReactNode;
@@ -11,7 +11,7 @@ interface Props {
 interface ContextData {
   isLoading: boolean;
   isAuthorized: boolean;
-  user: UserResponse | undefined;
+  user: User | undefined;
 }
 
 const AuthContext = createContext<ContextData>({ isLoading: true, isAuthorized: false, user: undefined });
