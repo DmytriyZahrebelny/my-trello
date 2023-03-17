@@ -5,9 +5,8 @@
     "lib": ["ESNext"],
     "baseUrl": ".",
     "outDir": "./build",
-    "types": ["node"],
     "experimentalDecorators": true
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist", "**/*.test.ts?(x)"]
+  "exclude": ["node_modules", "build", "**/*.test.ts?(x)"]
 }
