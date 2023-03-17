@@ -15,6 +15,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "dependencies": {
+    "@shared/types": "workspace:*"
+  },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.42.0",
     "@typescript-eslint/parser": "^5.42.0",
@@ -22,7 +25,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.7.1",
-    "typescript": "5.0.0-beta"
+    "typescript": "^5.0.2"
   },
   "eslintConfig": {
     "parser": "@typescript-eslint/parser",
@@ -46,8 +49,5 @@
       "no-unused-vars": "off",
       "@typescript-eslint/no-unused-vars": "error"
     }
-  },
-  "dependencies": {
-    "@shared/types": "workspace:*"
   }
 }
