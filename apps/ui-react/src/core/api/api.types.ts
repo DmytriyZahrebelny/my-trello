@@ -16,12 +16,12 @@ export interface RefreshTokenResponse {
   refreshTokenExpiresIn: number;
 }
 
-export interface CreateWorkSpaceParams {
+export interface CreateWorkspaceParams {
   name: string;
 }
 
-export interface DeleteWorkSpaceParams {
+export interface DeleteWorkspaceParams {
   id: number;
 }
 
-export interface UpdateWorkSpaceParams extends CreateWorkSpaceParams, DeleteWorkSpaceParams {}
+export interface UpdateWorkSpaceParams extends CreateWorkspaceParams, DeleteWorkspaceParams {}

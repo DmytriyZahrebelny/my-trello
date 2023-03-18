@@ -43,7 +43,7 @@ export const lightTheme: ThemeOptions = {
     },
     background: {
       default: '#FFFFFF',
-      paper: '#EDEDF2',
+      paper: '#ffffff',
     },
   },
   typography: {
