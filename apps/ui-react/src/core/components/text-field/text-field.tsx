@@ -23,6 +23,7 @@ export const TextField = ({ name, label, styles }: Props) => {
       css={[textFieldStyle, styles]}
       {...field}
       label={label}
+      value={field.value || ''}
       error={Boolean(fieldState.error?.message)}
       helperText={fieldState.error?.message}
     />

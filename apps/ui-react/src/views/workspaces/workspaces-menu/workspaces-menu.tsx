@@ -4,8 +4,13 @@ import AddIcon from '@mui/icons-material/Add';
 import { useWorkSpacesQuery } from '@core/api/api-work-spaces';
 import { WorkspacesMenuItem } from './workspaces-menu-item';
 import { styles } from './workspaces-menu.styles';
+import { memo } from 'react';
 
-export const WorkspacesMenu = () => {
+interface Props {
+  onModalOpen: () => void;
+}
+
+export const WorkspacesMenu = memo(({ onModalOpen }: Props) => {
   const { data: workspaces = [] } = useWorkSpacesQuery();
 
   return (
@@ -15,7 +20,7 @@ export const WorkspacesMenu = () => {
         subheader={
           <div css={styles.menuTitleContainer}>
             <Typography variant="h6">Workspaces</Typography>
-            <span css={styles.addWorkspace}>
+            <span css={styles.addWorkspace} onClick={onModalOpen}>
               <AddIcon />
             </span>
           </div>
@@ -27,4 +32,4 @@ export const WorkspacesMenu = () => {
       </List>
     </div>
   );
-};
+});

@@ -36,6 +36,7 @@ export const Password = ({ name, label = 'password', styles }: Props) => {
         {...field}
         id={name}
         label={label}
+        value={field.value || ''}
         type={showPassword ? 'text' : 'password'}
         endAdornment={
           <InputAdornment position="end">

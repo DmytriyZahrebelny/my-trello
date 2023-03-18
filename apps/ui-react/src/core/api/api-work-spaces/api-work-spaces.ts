@@ -5,7 +5,7 @@ import { Workspace } from '@shared/types';
 import { QUERY_KEYS } from '../../constants';
 import { axiosInstance } from '../api';
 import { ENDPOINTS } from '../api.constants';
-import { CreateWorkSpaceParams, UpdateWorkSpaceParams, DeleteWorkSpaceParams } from '../api.types';
+import { CreateWorkspaceParams, UpdateWorkSpaceParams, DeleteWorkspaceParams } from '../api.types';
 
 const getWorkSpaces = async (): Promise<Workspace[]> => {
   const { data } = await axiosInstance.get<Workspace[]>(ENDPOINTS.workSpaces);
@@ -25,7 +25,7 @@ const updateWorkSpace = async <T>(body: T): Promise<Workspace> => {
   return data;
 };
 
-const deleteWorkSpace = (body: DeleteWorkSpaceParams): Promise<string> => {
+const deleteWorkSpace = (body: DeleteWorkspaceParams): Promise<string> => {
   return axiosInstance.delete(ENDPOINTS.workSpaces, { params: { ...body } });
 };
 
@@ -36,10 +36,10 @@ export const useWorkSpacesQuery = () =>
   });
 
 export const useCreateWorkSpaceMutation = () =>
-  useMutation<Workspace, AxiosError, CreateWorkSpaceParams>({ mutationFn: createWorkSpace });
+  useMutation<Workspace, AxiosError, CreateWorkspaceParams>({ mutationFn: createWorkSpace });
 
 export const useUpdateWorkSpaceMutation = () =>
   useMutation<Workspace, AxiosError, UpdateWorkSpaceParams>({ mutationFn: updateWorkSpace });
 
 export const useDeleteWorkSpaceMutation = () =>
-  useMutation<string, AxiosError, DeleteWorkSpaceParams>({ mutationFn: deleteWorkSpace });
+  useMutation<string, AxiosError, DeleteWorkspaceParams>({ mutationFn: deleteWorkSpace });
