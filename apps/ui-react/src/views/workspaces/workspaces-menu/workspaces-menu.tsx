@@ -1,10 +1,10 @@
+import { memo } from 'react';
 import { Typography, List } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 
 import { useWorkSpacesQuery } from '@core/api/api-work-spaces';
 import { WorkspacesMenuItem } from './workspaces-menu-item';
 import { styles } from './workspaces-menu.styles';
-import { memo } from 'react';
 
 interface Props {
   onModalOpen: () => void;
