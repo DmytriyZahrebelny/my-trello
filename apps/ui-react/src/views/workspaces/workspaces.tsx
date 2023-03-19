@@ -1,3 +1,4 @@
+import { useCallback, useState } from 'react';
 import { Grid } from '@mui/material';
 
 import { Modal } from '@core/components/modal';
@@ -5,7 +6,6 @@ import { WorkspacesMenu } from './workspaces-menu';
 import { WorkspacesList } from './workspaces-list';
 import { WorkspaceCreationForm } from './workspace-creation-form';
 import { styles } from './workspaces.styles';
-import { useCallback, useState } from 'react';
 
 export const Workspaces = () => {
   const [isModalOpen, setModal] = useState(false);
