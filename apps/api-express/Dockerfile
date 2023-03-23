@@ -1,4 +1,4 @@
-FROM node:19-bullseye
+FROM node:19.4-alpine
 WORKDIR /usr/src/app
 COPY ../../package.json \
      ../../pnpm-lock.yaml \

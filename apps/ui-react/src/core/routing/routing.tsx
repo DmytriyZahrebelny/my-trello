@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import { Authorization, SignIn, SignUp } from '@views/authorization';
 import { Workspaces } from '@views/workspaces';
+import { Board } from '@views/board';
 import { useAuthContext } from '@core/providers';
 import { ROUTES } from '../constants';
 import { Loading } from '../components/loading';
@@ -16,6 +17,7 @@ export const Routing = () => {
     <Suspense fallback={<Loading />}>
       <Routes>
         <Route path="/" element={<Workspaces />} />
+        <Route path="/:id" element={<Board />} />
       </Routes>
     </Suspense>
   ) : (
