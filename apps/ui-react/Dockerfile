@@ -21,7 +21,7 @@ ARG PORT
 ENV PORT ${PORT}
 EXPOSE ${PORT}
 RUN if [ "$NODE_ENV" = "development" ]; \
-        then pnpm install; \
+        then pnpm install --frozen-lockfile; \
         else pnpm install --prod; \
         fi
 CMD [ "pnpm", "run", "ui-react" ]
