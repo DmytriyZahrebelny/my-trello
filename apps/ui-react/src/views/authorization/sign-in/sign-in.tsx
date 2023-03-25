@@ -26,7 +26,7 @@ export const SignIn = () => {
     mutate(values, {
       onSuccess({ data }) {
         setTokens(data);
-        client.invalidateQueries(QUERY_KEYS.user, { exact: true });
+        client.invalidateQueries([QUERY_KEYS.user], { exact: true });
       },
       onError({ message }) {
         Notify.failure(message);
