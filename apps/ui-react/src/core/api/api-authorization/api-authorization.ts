@@ -1,5 +1,5 @@
 import { AxiosError, AxiosPromise } from 'axios';
-import { useMutation, useQuery } from 'react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import type { User, NewUser } from '@shared/types';
 
 import { QUERY_KEYS } from '../../constants';
@@ -37,4 +37,4 @@ export const useLogOutMutation = () => {
 };
 
 export const useUser = () =>
-  useQuery<User, AxiosError>({ queryKey: QUERY_KEYS.user, queryFn: getUser, cacheTime: FOUR_HOURS });
+  useQuery<User, AxiosError>({ queryKey: [QUERY_KEYS.user], queryFn: getUser, cacheTime: FOUR_HOURS });

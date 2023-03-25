@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios';
-import { useMutation, useQuery } from 'react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { Workspace } from '@shared/types';
 
 import { QUERY_KEYS } from '../../constants';
@@ -31,7 +31,7 @@ const deleteWorkSpace = (body: DeleteWorkspaceParams): Promise<string> => {
 
 export const useWorkSpacesQuery = () =>
   useQuery<Workspace[], AxiosError>({
-    queryKey: QUERY_KEYS.workSpaces,
+    queryKey: [QUERY_KEYS.workSpaces],
     queryFn: getWorkSpaces,
   });
 

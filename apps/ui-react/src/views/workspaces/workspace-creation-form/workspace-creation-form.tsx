@@ -23,7 +23,7 @@ export const WorkspaceCreationForm = ({ onClose }: Props) => {
       onSuccess() {
         onClose();
         Notify.success('Workspace was created successfully');
-        client.invalidateQueries(QUERY_KEYS.workSpaces, { exact: true });
+        client.invalidateQueries([QUERY_KEYS.workSpaces], { exact: true });
       },
       onError({ message }) {
         Notify.failure(message);
