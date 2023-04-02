@@ -18,18 +18,22 @@ services:
 
   api:
     build:
-      context: apps/api-express
+      context: .
+      dockerfile: apps/api-express/Dockerfile
+      target: prod
       args:
         - PORT=4000
         - NODE_ENV=production
     ports:
       - 8000:4000
-    command: pnpm start
+    env_file:
+      - ./.env.development.local
 
   api_dev:
     build:
       context: .
       dockerfile: apps/api-express/Dockerfile
+      target: dev
       args:
         - PORT=4000
         - NODE_ENV=development
@@ -42,7 +46,7 @@ services:
     volumes:
       - ./:/usr/src/app
       - /usr/src/app/node_modules
-    command: pnpm run api-express
+    command: pnpm run api:dev
 
   db:
     image: postgres
