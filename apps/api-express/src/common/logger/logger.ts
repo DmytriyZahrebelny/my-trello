@@ -13,14 +13,8 @@ const logger = pino(
   {
     name: `base-logger`,
     level: process.env.LOG_LEVEL || defaultLogLevel,
-    transport: {
-      target: 'pino-pretty',
-      options: {
-        colorize: true,
-      },
-    },
   },
-  isDevMode ? process.stdout : pino.destination(LOG_FILE)
+  isDevMode ? process.stdout : pino.destination(`${__dirname}/${LOG_FILE}`)
 );
 
 export const getLogger = (options: Record<string, string> = {}) => {

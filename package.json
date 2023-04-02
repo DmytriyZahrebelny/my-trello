@@ -9,8 +9,9 @@
     "check:format": "prettier --check ./apps/**/*.{ts,json}",
     "format": "prettier --write ./apps/**/*.{ts,tsx,json}",
     "ui-react": "pnpm --filter ui-react run start",
-    "docker:api-express": "docker-compose up api_dev",
-    "api-express": "pnpm --filter api-express run start:dev"
+    "docker:api:dev": "docker-compose up api_dev",
+    "api:dev": "pnpm --filter api-express run start:dev",
+    "api:build": "pnpm --filter api-express run build"
   },
   "keywords": [],
   "author": "",
