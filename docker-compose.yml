@@ -27,7 +27,7 @@ services:
     ports:
       - 8000:4000
     env_file:
-      - ./.env.development.local
+      - ./.env
 
   api_dev:
     build:
@@ -42,19 +42,20 @@ services:
     ports:
       - 8000:4000
     env_file:
-      - ./.env.development.local
+      - ./.env
     volumes:
       - ./:/usr/src/app
       - /usr/src/app/node_modules
     command: pnpm run api:dev
 
   db:
-    image: postgres
+    image: postgres:15.2-alpine
     restart: always
     ports:
-      - '5432:5432'
+      - 5432:5432
+    hostname: test_host
     env_file:
-      - ./.env.development.local
+      - ./.env
     volumes:
       - pgdata:/var/lib/postgresql/data
 
