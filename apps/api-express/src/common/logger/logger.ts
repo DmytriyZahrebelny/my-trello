@@ -1,12 +1,10 @@
 import { pino } from 'pino';
 
-const Env = {
-  DEVELOPMENT: `development`,
-  PRODUCTION: `production`,
-};
+import { config } from '../config';
+
 const LOG_FILE = `./api.log`;
 
-const isDevMode = process.env.NODE_ENV === Env.DEVELOPMENT;
+const isDevMode = config.NODE_ENV === 'development';
 const defaultLogLevel = isDevMode ? `info` : `error`;
 
 const logger = pino(

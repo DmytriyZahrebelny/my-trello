@@ -3,7 +3,8 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 import type { Response, Request } from '../../common/types';
-import { HTTP_CODE } from '../../common/constants/index';
+import { config } from '../../common/config';
+import { HTTP_CODE } from '../../common/constants';
 import { createTokens } from '../../utils/jwt';
 import { UserService } from './user.service';
 import { userValidator } from './user.middleware';
@@ -34,7 +35,7 @@ export class UserController {
 
     const [, token] = authorization.split(' ');
 
-    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET as string, async (err, data) => {
+    jwt.verify(token, config.ACCESS_TOKEN_SECRET, async (err, data) => {
       if (err) {
         return res.sendStatus(HTTP_CODE.FORBIDDEN);
       }

@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
+import { config } from '../config';
 import { HTTP_CODE } from '../constants/common';
 
 export const authenticateJwt = (req: Request, res: Response, next: NextFunction) => {
@@ -16,7 +17,7 @@ export const authenticateJwt = (req: Request, res: Response, next: NextFunction)
     return res.sendStatus(HTTP_CODE.UNAUTHORIZED);
   }
 
-  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET as string, (err, data) => {
+  jwt.verify(token, config.ACCESS_TOKEN_SECRET, (err, data) => {
     if (err) {
       return res.sendStatus(HTTP_CODE.FORBIDDEN);
     }

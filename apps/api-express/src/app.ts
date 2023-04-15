@@ -4,16 +4,16 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 
 import { getLogger } from './common/logger';
-import { loggerMiddleware } from './common/middleware/index';
+import { loggerMiddleware } from './common/middleware';
 import type { Controllers } from './server';
 
 const logger = getLogger({ name: 'app' });
 
 export class App {
   public app: Application;
-  public port: number;
+  public port: string;
 
-  constructor(controllers: Controllers, port: number) {
+  constructor(controllers: Controllers, port: string) {
     this.app = express();
     this.port = port;
 
