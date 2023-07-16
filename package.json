@@ -20,24 +20,30 @@
     "@shared/types": "workspace:*"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.42.0",
-    "@typescript-eslint/parser": "^5.42.0",
-    "eslint": "^8.26.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "prettier": "^2.7.1",
-    "typescript": "^5.0.2"
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.45.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "prettier": "^3.0.0",
+    "typescript": "^5.1.6"
   },
   "eslintConfig": {
-    "parser": "@typescript-eslint/parser",
     "extends": [
       "eslint:recommended",
-      "plugin:@typescript-eslint/recommended",
-      "plugin:prettier/recommended"
+      "plugin:prettier/recommended",
+      "plugin:@typescript-eslint/recommended-type-checked",
+      "plugin:@typescript-eslint/stylistic-type-checked",
+      "plugin:@typescript-eslint/strict"
     ],
     "plugins": [
-      "@typescript-eslint/eslint-plugin"
+      "@typescript-eslint"
     ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "project": true,
+      "tsconfigRootDir": "./"
+    },
     "env": {
       "node": true,
       "es2021": true
