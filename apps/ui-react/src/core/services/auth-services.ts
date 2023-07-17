@@ -2,12 +2,12 @@ import cookies from 'js-cookie';
 
 import { COOKIE_NAME_LIST } from '../constants/common';
 
-export type TokensArgs = {
+export interface TokensArgs {
   accessToken: string;
   refreshToken: string;
   accessTokenExpiresIn: number;
   refreshTokenExpiresIn: number;
-};
+}
 
 export const getRefreshToken = () => cookies.get(COOKIE_NAME_LIST.AUTH_REFRESH_TOKEN);
 export const getAccessToken = () => cookies.get(COOKIE_NAME_LIST.AUTH_ACCESS_TOKEN);

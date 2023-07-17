@@ -1,3 +1,5 @@
-import { lazy } from 'react';
+import { lazy, FunctionComponent } from 'react';
 
-export const Board = lazy(() => import('./board' as string).then((module) => ({ default: module.Board })));
+export const Board = lazy<FunctionComponent>(() =>
+  import('./board' as string).then((module) => ({ default: (module as { Board: FunctionComponent }).Board })),
+);

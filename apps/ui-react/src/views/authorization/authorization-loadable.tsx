@@ -1,5 +1,7 @@
-import { lazy } from 'react';
+import { lazy, FunctionComponent } from 'react';
 
-export const Authorization = lazy(() =>
-  import('./authorization' as string).then((module) => ({ default: module.Authorization }))
+export const Authorization = lazy<FunctionComponent>(() =>
+  import('./authorization' as string).then((module) => ({
+    default: (module as { Authorization: FunctionComponent }).Authorization,
+  })),
 );
