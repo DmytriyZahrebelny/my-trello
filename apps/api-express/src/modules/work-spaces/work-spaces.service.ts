@@ -7,7 +7,7 @@ export class WorkSpacesService {
 
   async findAll(userId: string): Promise<Workspace[]> {
     const { rows } = await this.pool.query<Omit<Workspace, 'userId'> & { user_id: string }>(
-      `SELECT * FROM work_spaces WHERE user_id='${userId}'`
+      `SELECT * FROM work_spaces WHERE user_id='${userId}'`,
     );
 
     return rows.map(({ user_id, ...rest }) => ({ userId: user_id, ...rest }));
@@ -15,7 +15,7 @@ export class WorkSpacesService {
 
   async create(userId: string, name: string): Promise<Workspace> {
     const { rows } = await this.pool.query<Omit<Workspace, 'userId'> & { user_id: string }>(
-      `INSERT INTO work_spaces (name, user_id) VALUES ('${name}', '${userId}') RETURNING name, id, user_id`
+      `INSERT INTO work_spaces (name, user_id) VALUES ('${name}', '${userId}') RETURNING name, id, user_id`,
     );
 
     const { user_id, ...rest } = rows[0];
@@ -25,7 +25,7 @@ export class WorkSpacesService {
 
   async updateByWorkSpaceId(id: string, name: string): Promise<Workspace> {
     const { rows } = await this.pool.query<Omit<Workspace, 'userId'> & { user_id: string }>(
-      `UPDATE work_spaces set name='${name}' WHERE id='${id}' RETURNING name, id, user_id`
+      `UPDATE work_spaces set name='${name}' WHERE id='${id}' RETURNING name, id, user_id`,
     );
 
     const { user_id, ...rest } = rows[0];

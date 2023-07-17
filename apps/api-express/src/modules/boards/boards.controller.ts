@@ -1,6 +1,7 @@
-import express, { Request, Response, NextFunction } from 'express';
+import express, { NextFunction } from 'express';
 
-import { authenticateJwt } from '../../common/middleware/index';
+import type { Response, Request } from '../../common/types';
+import { authenticateJwt } from '../../common/middleware';
 import { BoardsService } from './boards.services';
 
 export class BoardsController {
@@ -12,8 +13,8 @@ export class BoardsController {
   }
 
   public intializeRoutes() {
-    this.router.get('/boards', authenticateJwt, this.getBoards);
-    this.router.post('/boards', authenticateJwt, this.createBoard);
+    this.router.get('/boards', authenticateJwt, this.getBoards.bind(this));
+    this.router.post('/boards', authenticateJwt, this.createBoard.bind(this));
   }
 
   async getBoards(req: Request, res: Response): Promise<void> {
@@ -23,8 +24,8 @@ export class BoardsController {
     res.send(data);
   }
 
-  async createBoard(req: Request, res: Response, next: NextFunction): Promise<void> {
-    const { name }: { name: string } = await req.body;
+  async createBoard(req: Request<{ name: string }>, res: Response, next: NextFunction): Promise<void> {
+    const { name } = req.body;
 
     try {
       const result = await this.boardsService.create(name);

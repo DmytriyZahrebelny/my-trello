@@ -1,0 +1,46 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended-type-checked",
+    "plugin:@typescript-eslint/stylistic-type-checked",
+    "plugin:@typescript-eslint/strict",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": [
+    "@typescript-eslint",
+    "import"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "tsconfigRootDir": "./",
+    "project": [
+      "./tsconfig.json",
+      "./apps/ui-react/tsconfig.json",
+      "./apps/api-express/tsconfig.json"
+    ]
+  },
+  "root": true,
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2021": true
+  },
+  "ignorePatterns": ["build", "node_modules"],
+  "rules": {
+    "import/prefer-default-export": "off",
+    "import/no-default-export": "error",
+    "import/no-unresolved": 0,
+    "no-console": 1,
+    "prettier/prettier": 2,
+    "no-useless-escape": 0,
+    "no-use-before-define": "off",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-misused-promises": [
+      "error",
+      {
+        "checksVoidReturn": false
+      }
+    ]
+  }
+}

@@ -12,7 +12,7 @@ export class UserService {
     const hashPassword = await bcrypt.hash(password, salt);
 
     const { rows } = await this.pool.query<User>(
-      `INSERT INTO users (name, email, password) VALUES ('${name}', '${email}', '${hashPassword}') RETURNING name, email, id`
+      `INSERT INTO users (name, email, password) VALUES ('${name}', '${email}', '${hashPassword}') RETURNING name, email, id`,
     );
 
     return rows[0];

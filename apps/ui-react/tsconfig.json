@@ -10,6 +10,5 @@
       "@views/*": ["src/views/*"]
     }
   },
-  "include": ["src/**/*"],
-  "exclude": ["./node_modules", "build", "**/*.test.ts?(x)"]
+  "include": ["src/**/*"]
 }
