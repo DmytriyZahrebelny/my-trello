@@ -17,7 +17,7 @@ const isLocalEnvironment = process.env.NODE_ENV !== 'production' || (process.env
 const envOutput = isLocalEnvironment ? dotenv.config({ path: path.resolve(process.cwd(), '../../.env') }).parsed : {};
 
 export const config = {
-  DB_HOST: 'localhost' || process.env.DB_HOST,
+  DB_HOST: process.env.NODE_ENV ? process.env.DB_HOST : 'localhost',
   DB_PORT: Number(envOutput?.DB_PORT) || Number(process.env.DB_PORT),
   DB_USER: envOutput?.DB_USER || process.env.DB_USER,
   DB_PASSWORD: envOutput?.DB_PASSWORD || process.env.DB_PASSWORD,
