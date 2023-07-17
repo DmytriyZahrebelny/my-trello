@@ -8,6 +8,7 @@
     "lint": "eslint .",
     "check:format": "prettier --check ./apps/**/*.{ts,json}",
     "format": "prettier --write ./apps/**/*.{ts,tsx,json}",
+    "tscheck": "pnpm --filter ui-react --filter api-express run tscheck",
     "ui-react": "pnpm --filter ui-react run start",
     "docker:api:dev": "docker-compose up api_dev",
     "api:dev": "pnpm --filter api-express run start:dev",
@@ -24,37 +25,9 @@
     "@typescript-eslint/parser": "^6.0.0",
     "eslint": "^8.45.0",
     "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^5.0.0",
     "prettier": "^3.0.0",
     "typescript": "^5.1.6"
-  },
-  "eslintConfig": {
-    "extends": [
-      "eslint:recommended",
-      "plugin:prettier/recommended",
-      "plugin:@typescript-eslint/recommended-type-checked",
-      "plugin:@typescript-eslint/stylistic-type-checked",
-      "plugin:@typescript-eslint/strict"
-    ],
-    "plugins": [
-      "@typescript-eslint"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-      "project": true,
-      "tsconfigRootDir": "./"
-    },
-    "env": {
-      "node": true,
-      "es2021": true
-    },
-    "rules": {
-      "no-console": 1,
-      "prettier/prettier": 2,
-      "no-useless-escape": 0,
-      "no-use-before-define": "off",
-      "no-unused-vars": "off",
-      "@typescript-eslint/no-unused-vars": "error"
-    }
   }
 }

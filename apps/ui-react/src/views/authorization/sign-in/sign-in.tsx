@@ -24,9 +24,9 @@ export const SignIn = () => {
 
   const onSubmit = (values: FormValues) => {
     mutate(values, {
-      onSuccess({ data }) {
+      async onSuccess({ data }) {
         setTokens(data);
-        client.invalidateQueries([QUERY_KEYS.user], { exact: true });
+        await client.invalidateQueries([QUERY_KEYS.user], { exact: true });
       },
       onError({ message }) {
         Notify.failure(message);

@@ -26,8 +26,8 @@ export class UserController {
     this.router.put('/logout', this.logout.bind(this));
   }
 
-  async me(req: Request, res: Response) {
-    const authorization = req.headers['authorization'];
+  me(req: Request, res: Response) {
+    const authorization = req.headers.authorization;
 
     if (!authorization) {
       return res.sendStatus(HTTP_CODE.UNAUTHORIZED);

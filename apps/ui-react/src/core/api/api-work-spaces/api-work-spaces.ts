@@ -14,13 +14,13 @@ const getWorkSpaces = async (): Promise<Workspace[]> => {
 };
 
 const createWorkSpace = async <T>(body: T): Promise<Workspace> => {
-  const { data } = await axiosInstance.post(ENDPOINTS.workSpaces, body);
+  const { data } = await axiosInstance.post<Workspace>(ENDPOINTS.workSpaces, body);
 
   return data;
 };
 
 const updateWorkSpace = async <T>(body: T): Promise<Workspace> => {
-  const { data } = await axiosInstance.put(ENDPOINTS.workSpaces, body);
+  const { data } = await axiosInstance.put<Workspace>(ENDPOINTS.workSpaces, body);
 
   return data;
 };

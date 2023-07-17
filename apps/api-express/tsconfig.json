@@ -8,6 +8,5 @@
     "experimentalDecorators": true,
     "sourceMap": false
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "build", "**/*.test.ts?(x)"]
+  "include": ["src/**/*"]
 }

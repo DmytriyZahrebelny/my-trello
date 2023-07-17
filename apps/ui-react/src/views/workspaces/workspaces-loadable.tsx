@@ -1,5 +1,7 @@
-import { lazy } from 'react';
+import { lazy, FunctionComponent } from 'react';
 
-export const Workspaces = lazy(() =>
-  import('./workspaces' as string).then((module) => ({ default: module.Workspaces }))
+export const Workspaces = lazy<FunctionComponent>(() =>
+  import('./workspaces' as string).then((module) => ({
+    default: (module as { Workspaces: FunctionComponent }).Workspaces,
+  })),
 );

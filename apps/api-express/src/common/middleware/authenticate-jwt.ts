@@ -5,7 +5,7 @@ import { config } from '../config';
 import { HTTP_CODE } from '../constants/common';
 
 export const authenticateJwt = (req: Request, res: Response, next: NextFunction) => {
-  const authorization = req.headers['authorization'];
+  const authorization = req.headers.authorization;
 
   if (!authorization) {
     return res.sendStatus(HTTP_CODE.UNAUTHORIZED);

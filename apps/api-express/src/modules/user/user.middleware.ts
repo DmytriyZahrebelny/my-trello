@@ -1,8 +1,10 @@
-import { Request, Response, NextFunction } from 'express';
+import { NextFunction } from 'express';
 import * as yup from 'yup';
 
+import type { Response, Request } from '../../common/types';
 import { HTTP_CODE } from '../../common/constants/common';
 import { UserService } from './user.service';
+import { SignUpDto } from './dto';
 
 const schema = yup.object().shape({
   name: yup.string().required('Name is required').max(80, 'name should have no more than 80 characters'),
@@ -14,22 +16,23 @@ const schema = yup.object().shape({
     .oneOf([yup.ref('password'), null], 'Passwords must match'),
 });
 
-export const userValidator = (service: UserService) => async (req: Request, res: Response, next: NextFunction) => {
-  const newUser = req.body;
+export const userValidator =
+  (service: UserService) => async (req: Request<SignUpDto>, res: Response, next: NextFunction) => {
+    const newUser = req.body;
 
-  try {
-    await schema.validate(newUser, { abortEarly: true });
-  } catch (error) {
-    const { message } = error as yup.ValidationError;
+    try {
+      await schema.validate(newUser, { abortEarly: true });
+    } catch (error) {
+      const { message } = error as yup.ValidationError;
 
-    return res.status(HTTP_CODE.BAD_REQUEST).send({ message });
-  }
+      return res.status(HTTP_CODE.BAD_REQUEST).send({ message });
+    }
 
-  const userByEmail = await service.findByEmail(req.body.email);
+    const userByEmail = await service.findByEmail(req.body.email);
 
-  if (userByEmail) {
-    return res.status(HTTP_CODE.BAD_REQUEST).send({ message: 'Email already exists' });
-  }
+    if (userByEmail) {
+      return res.status(HTTP_CODE.BAD_REQUEST).send({ message: 'Email already exists' });
+    }
 
-  return next();
-};
+    return next();
+  };
