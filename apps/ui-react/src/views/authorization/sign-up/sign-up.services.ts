@@ -10,5 +10,5 @@ export const validateSignUpSchema = yupResolver(
       .string()
       .required('Repeated password is required')
       .oneOf([yup.ref('password'), null], 'Passwords must match'),
-  })
+  }),
 );

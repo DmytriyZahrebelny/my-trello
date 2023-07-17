@@ -4,14 +4,16 @@ import { getRefreshToken, getAccessToken, setTokens, clearTokens } from '../serv
 import { refreshToken } from './api-authorization';
 
 export const tokenInterceptors = async (config: InternalAxiosRequestConfig): Promise<InternalAxiosRequestConfig> => {
-  if (!getRefreshToken()) {
+  const refreshTokenFromCookies = getRefreshToken();
+
+  if (!refreshTokenFromCookies) {
     clearTokens();
     return config;
   }
 
   if (!getAccessToken()) {
     try {
-      const response = await refreshToken(getRefreshToken() as string);
+      const response = await refreshToken(refreshTokenFromCookies);
 
       setTokens({
         accessToken: response.data.accessToken,

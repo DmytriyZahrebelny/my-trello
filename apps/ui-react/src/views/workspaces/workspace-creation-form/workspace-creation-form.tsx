@@ -20,10 +20,10 @@ export const WorkspaceCreationForm = ({ onClose }: Props) => {
 
   const handleFormSubmit = (values: CreateWorkspaceParams) => {
     createWorkspace(values, {
-      onSuccess() {
+      async onSuccess() {
         onClose();
         Notify.success('Workspace was created successfully');
-        client.invalidateQueries([QUERY_KEYS.workSpaces], { exact: true });
+        await client.invalidateQueries([QUERY_KEYS.workSpaces], { exact: true });
       },
       onError({ message }) {
         Notify.failure(message);

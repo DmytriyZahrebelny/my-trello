@@ -8,9 +8,5 @@
     "experimentalDecorators": true,
     "sourceMap": false
   },
-  "paths": {
-    "@utils/*": ["src/utils/*"],
-  },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "build", "**/*.test.ts?(x)"]
+  "include": ["src/**/*"]
 }

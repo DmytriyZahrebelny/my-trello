@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { useFormContext, useController } from 'react-hook-form';
 import { FormControl, OutlinedInput, InputLabel, InputAdornment, IconButton, FormHelperText } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import type { Theme } from '@mui/material/styles';
 import { css } from '@emotion/react';
+import type { Theme } from '@mui/material/styles';
 import type { SerializedStyles } from '@emotion/react';
 
 interface Props {
@@ -36,7 +36,7 @@ export const Password = ({ name, label = 'password', styles }: Props) => {
         {...field}
         id={name}
         label={label}
-        value={field.value || ''}
+        value={(field.value as string) || ''}
         type={showPassword ? 'text' : 'password'}
         endAdornment={
           <InputAdornment position="end">

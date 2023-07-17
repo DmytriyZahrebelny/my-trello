@@ -12,5 +12,14 @@
     "allowUnreachableCode": false,
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true
-  }
+  },
+  "references": [
+    {
+      "path": "./apps/api-express"
+    },
+    {
+      "path": "./apps/packages/ui-react"
+    }
+  ],
+  "exclude": ["node_modules", "build", "**/*.test.ts?(x)"]
 }
