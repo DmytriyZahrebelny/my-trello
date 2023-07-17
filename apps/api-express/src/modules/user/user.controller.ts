@@ -58,7 +58,6 @@ export class UserController {
 
   async signIn(req: Request<SignInDto>, res: Response) {
     const { email, password } = req.body;
-
     const user = await this.userService.findByEmail(email);
 
     if (!user) {

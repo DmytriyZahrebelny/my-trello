@@ -1,10 +1,12 @@
-import { BoardGrid } from './board-grid';
-import { styles } from './board.styles';
+// import { BoardGrid } from './board-grid';
+import { BoardContainer } from './board-container';
+// import { styles } from './board.styles';
 
 export const Board = () => {
   return (
-    <div css={styles.container}>
-      <BoardGrid />
-    </div>
+    <BoardContainer />
+    // {/* <BoardGrid /> */}
+    // <div css={styles.container}>
+    // </div>
   );
 };

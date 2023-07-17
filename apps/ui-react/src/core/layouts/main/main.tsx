@@ -6,8 +6,10 @@ interface Props {
 }
 
 const styles = css`
-  width: calc(100% - 60px);
   margin: 0 0 0 auto;
+  width: calc(100% - 60px);
+  height: 100%;
+  flex-grow: 1;
 `;
 
 export const Main = ({ children }: Props) => {
