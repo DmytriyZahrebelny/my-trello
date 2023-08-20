@@ -27,6 +27,7 @@
   },
   "ignorePatterns": ["build", "node_modules"],
   "rules": {
+    "prefer-const": "off",
     "import/prefer-default-export": "off",
     "import/no-default-export": "error",
     "import/no-unresolved": 0,

@@ -2,7 +2,6 @@ import { styles } from './board-container.styles';
 
 export const BoardContainer = () => {
   return (
-    // <div css={styles.container}>
     <ul css={styles.list}>
       <li style={{ background: 'yellow', margin: 2 }}>
         <span>0</span>
@@ -53,6 +52,5 @@ export const BoardContainer = () => {
         <span>1</span>5
       </li>
     </ul>
-    // </div>
   );
 };
