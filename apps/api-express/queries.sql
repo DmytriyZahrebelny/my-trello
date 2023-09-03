@@ -7,16 +7,34 @@ CREATE TABLE users (
   PRIMARY KEY (id)
 );
 
-CREATE TABLE boards (
+CREATE TABLE workspaces (
   id bigserial NOT NULL,
   name character varying(124) NOT NULL,
+  user_id UUID REFERENCES users (id) ON DELETE SET NULL,
   PRIMARY KEY (id)
 );
 
-CREATE TABLE work_spaces (
-  id SERIAL PRIMARY KEY,
+CREATE TABLE boards (
+  id bigserial NOT NULL,
   name character varying(124) NOT NULL,
-  user_id UUID,
-  FOREIGN KEY (user_id) REFERENCES users (id)
-    ON DELETE SET NULL
+  workspace_id bigserial REFERENCES workspaces (id) NOT NULL,
+  user_id UUID REFERENCES users (id)
+    ON DELETE SET NULL,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE columns (
+  id bigserial NOT NULL,
+  name character varying(124) NOT NULL,
+  board_id bigserial REFERENCES boards (id),
+  user_id UUID REFERENCES users (id) ON DELETE SET NULL,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE cards (
+  id bigserial NOT NULL,
+  name character varying(124) NOT NULL,
+  column_id bigserial REFERENCES columns (id),
+  user_id UUID REFERENCES users (id) ON DELETE SET NULL,
+  PRIMARY KEY (id)
 );

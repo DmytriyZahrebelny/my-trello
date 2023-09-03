@@ -40,10 +40,10 @@ export class UserService {
   }
 
   async refreshToken(refreshToken: string, userId: string) {
-    await this.pool.query(`UPDATE users set refresh_token='${refreshToken}' WHERE users.id='${userId}'`);
+    await this.pool.query(`UPDATE users SET refresh_token='${refreshToken}' WHERE users.id='${userId}'`);
   }
 
   async removeRefreshToken(userId: string) {
-    await this.pool.query(`UPDATE users set refresh_token=null WHERE users.id='${userId}'`);
+    await this.pool.query(`UPDATE users SET refresh_token=null WHERE users.id='${userId}'`);
   }
 }
