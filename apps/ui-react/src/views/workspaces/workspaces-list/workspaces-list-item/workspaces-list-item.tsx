@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { styles } from './workspaces-list-item.styles';
 
 interface Props {
-  id: number;
+  id: string;
   name: string;
 }
 
