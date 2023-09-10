@@ -4,5 +4,6 @@ export const ENDPOINTS = {
   refreshToken: '/refresh-token',
   logOut: '/logout',
   me: '/me',
-  workSpaces: '/work-spaces',
+  workSpaces: '/workspace',
+  board: '/board',
 };

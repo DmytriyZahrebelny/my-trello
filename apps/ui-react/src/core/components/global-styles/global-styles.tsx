@@ -10,17 +10,14 @@ const globalStyles = (theme: Partial<Theme>) => css`
   input {
     color-scheme: ${theme.palette?.mode};
   }
-  html {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
   body {
-    min-height: 100%;
+    height: 100vh;
   }
   .app-wrapper {
     height: 100%;
     background: ${theme.palette?.background.default};
+    display: flex;
+    flex-direction: column;
   }
 `;
 

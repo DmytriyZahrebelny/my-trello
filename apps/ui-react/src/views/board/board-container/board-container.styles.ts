@@ -15,9 +15,5 @@ export const styles = {
     overflow-x: auto;
     overflow-y: hidden;
     overscroll-behavior-inline: contain;
-
-    li {
-      display: inline-block;
-    }
   `,
 };

@@ -22,7 +22,7 @@ export class BoardController {
 
   async getBoard(req: Request<BoardDto>, res: Response, next: Next) {
     try {
-      const data = await this.boardService.findById(req.body.id);
+      const data = await this.boardService.findById(req.query.id as string);
       res.status(HTTP_CODE.OK).send(data);
     } catch (error) {
       next(error);
