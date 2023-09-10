@@ -1,5 +1,6 @@
-import { useRef } from 'react';
+import { useParams } from 'react-router-dom';
 
+import { useBoardQuery } from '@core/api/api-boards';
 import { Column } from './column';
 import { styles } from './board.styles';
 
@@ -17,10 +18,11 @@ const columnList = [
 ];
 
 export const Board = () => {
-  const ref = useRef<HTMLUListElement>(null);
-
+  const { boardId } = useParams();
+  const { data } = useBoardQuery({ id: boardId as unknown as string });
+  console.log(data);
   return (
-    <ul ref={ref} css={styles.list}>
+    <ul css={styles.list}>
       {columnList.map((name) => (
         <Column key={name} name={name} />
       ))}

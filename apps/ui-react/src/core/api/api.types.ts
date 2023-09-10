@@ -1,3 +1,6 @@
+export interface EntityId {
+  id: string;
+}
 export interface SignUpParams {
   name: string;
   email: string;

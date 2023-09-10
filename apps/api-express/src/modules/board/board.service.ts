@@ -9,17 +9,21 @@ export class BoardService {
     const { rows: board } = await this.pool.query<Board>(
       `SELECT id, name, workspace_id AS "workspaceId" FROM boards WHERE id='${boardId}'`,
     );
-    const { rows: columns } = await this.pool.query<Column>(
-      `SELECT id, name, board_id AS "boardId" FROM columns WHERE board_id='${board[0].id}'`,
-    );
+    if (board.length) {
+      const { rows: columns } = await this.pool.query<Column>(
+        `SELECT id, name, board_id AS "boardId" FROM columns WHERE board_id='${board[0].id}'`,
+      );
 
-    const cards = (
-      await Promise.all(
-        columns.map(({ id }) => this.pool.query<Card>(`SELECT id, name FROM cards WHERE column_id='${id}'`)),
-      )
-    ).map(({ rows }) => rows);
+      const cards = (
+        await Promise.all(
+          columns.map(({ id }) => this.pool.query<Card>(`SELECT id, name FROM cards WHERE column_id='${id}'`)),
+        )
+      ).map(({ rows }) => rows);
 
-    return { ...board[0], columns: columns.map((column, i) => ({ ...column, cards: cards[i] })) };
+      return { ...board[0], columns: columns.map((column, i) => ({ ...column, cards: cards[i] })) };
+    }
+
+    return { ...board[0], columns: [] };
   }
 
   async create(userId: string, workspaceId: string, name: string): Promise<Board> {

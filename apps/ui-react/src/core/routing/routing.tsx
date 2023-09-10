@@ -17,7 +17,7 @@ export const Routing = () => {
     <Suspense fallback={<Loading />}>
       <Routes>
         <Route path="/" element={<Workspaces />} />
-        <Route path="/:id" element={<Board />} />
+        <Route path="/:boardId" element={<Board />} />
       </Routes>
     </Suspense>
   ) : (
