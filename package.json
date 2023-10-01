@@ -11,6 +11,7 @@
     "tscheck": "pnpm -r tscheck",
     "clean": "rm -rf node_modules && pnpm -r clean",
     "cleanall": "rm pnpm-lock.yaml && rm -rf node_modules && pnpm -r clean",
+    "ui-react:build": "pnpm --filter ui-react run vbuild",
     "ui-react": "pnpm --filter ui-react run start",
     "docker:api:dev": "docker-compose up api_dev",
     "api:dev": "pnpm --filter api-express run start:dev",
@@ -30,6 +31,6 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^5.0.0",
     "prettier": "^3.0.0",
-    "typescript": "^5.1.6"
+    "typescript": "^5.2.2"
   }
 }
