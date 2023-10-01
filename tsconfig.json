@@ -1,9 +1,6 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "lib": ["ESNext", "dom"],
-    "moduleResolution": "NodeNext",
-    "sourceMap": true,
     "strict": true,
     "noImplicitAny": true,
     "esModuleInterop": true,
