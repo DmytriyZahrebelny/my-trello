@@ -1,7 +1,10 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "moduleResolution": "Bundler",
     "module": "ESNext",
+    "noEmit": true,
+    "lib": ["ESNext", "dom"],
     "baseUrl": ".",
     "jsxImportSource": "@emotion/react",
     "jsx": "react-jsx",
@@ -10,5 +13,5 @@
       "@views/*": ["src/views/*"]
     }
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "vite.config.ts"]
 }

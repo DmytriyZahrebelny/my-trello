@@ -1,3 +1,1 @@
-webpack.config.js
-webpack.development.js
-webpack.production.js
+vite.config.ts
