@@ -5,6 +5,7 @@ services:
     build:
       context: .
       dockerfile: apps/ui-react/Dockerfile
+      target: dev
       args:
       - PORT=4000
       - NODE_ENV=development
@@ -14,7 +15,7 @@ services:
       - ./:/usr/src/app
       - /usr/src/app/node_modules
       - /usr/src/app/apps/ui-react/node_modules
-    command: pnpm run ui-react
+    command: pnpm ui-react:dev
 
   api:
     build:

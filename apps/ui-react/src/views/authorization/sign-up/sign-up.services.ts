@@ -11,5 +11,5 @@ const schema = yup.object().shape({
     .oneOf([yup.ref('password')], 'Passwords must match'),
 });
 
-// @ts-expect-error
+// @ts-ignore
 export const validateSignUpSchema = yupResolver(schema);

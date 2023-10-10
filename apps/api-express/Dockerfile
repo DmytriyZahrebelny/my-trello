@@ -1,4 +1,4 @@
-FROM node:lts-alpine as base
+FROM node:18.16.1-bullseye-slim as base
 WORKDIR /usr/src/app
 ARG PORT
 ENV PORT ${PORT}
@@ -13,7 +13,6 @@ COPY packages/ ./packages/
 COPY apps/api-express/ ./apps/api-express/
 
 FROM base as dev
-COPY .prettierrc .prettierignore .eslintignore ./
 COPY --from=sources usr/src/app/packages/ ./packages/
 COPY --from=sources usr/src/app/package.json usr/src/app/pnpm-*.yaml usr/src/app/tsconfig.json ./
 COPY --from=sources usr/src/app/apps/api-express/ ./apps/api-express/

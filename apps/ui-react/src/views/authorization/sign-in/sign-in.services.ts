@@ -6,5 +6,5 @@ const schema = yup.object().shape({
   password: yup.string().required('password is required').min(8),
 });
 
-// @ts-expect-error
+// @ts-ignore
 export const validateSignInSchema = yupResolver(schema);

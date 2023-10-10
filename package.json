@@ -6,16 +6,16 @@
   "private": true,
   "scripts": {
     "lint": "eslint .",
-    "check:format": "prettier --check ./apps/**/*.{ts,json}",
+    "check:format": "prettier --check ./apps/**/*.{ts,tsx,json}",
     "format": "prettier --write ./apps/**/*.{ts,tsx,json}",
-    "tscheck": "pnpm -r tscheck",
+    "typecheck": "pnpm -r typecheck",
     "clean": "rm -rf node_modules && pnpm -r clean",
     "cleanall": "rm pnpm-lock.yaml && rm -rf node_modules && pnpm -r clean",
-    "ui-react:build": "pnpm --filter ui-react run vbuild",
-    "ui-react": "pnpm --filter ui-react run start",
+    "ui-react:build": "pnpm --filter ui-react build",
+    "ui-react:dev": "pnpm --filter ui-react start",
     "docker:api:dev": "docker-compose up api_dev",
-    "api:dev": "pnpm --filter api-express run start:dev",
-    "api:build": "pnpm --filter api-express run build"
+    "api:dev": "pnpm --filter api-express start:dev",
+    "api:build": "pnpm --filter api-express build"
   },
   "keywords": [],
   "author": "",
