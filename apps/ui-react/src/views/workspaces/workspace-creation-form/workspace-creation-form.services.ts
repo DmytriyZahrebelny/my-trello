@@ -5,5 +5,5 @@ const schema = yup.object().shape({
   name: yup.string().required('name is required').max(80, 'name should have no more than 80 characters'),
 });
 
-// @ts-expect-error
+// @ts-ignore
 export const validateCreateWorkspaceSchema = yupResolver(schema);
