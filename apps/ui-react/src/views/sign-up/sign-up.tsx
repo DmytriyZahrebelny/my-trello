@@ -3,10 +3,10 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-import { TextField } from 'src/components/text-field';
-import { Password } from 'src/components/password';
+import { TextField } from '@components/text-field';
+import { Password } from '@components/password';
 import { useSignUpMutation } from '@api/api-authorization';
-import { styles } from '../authorization.styles';
+import { styles } from './sign-up.styles';
 import { validateSignUpSchema } from './sign-up.services';
 
 export interface FormValues {

@@ -9,13 +9,12 @@
     "jsxImportSource": "@emotion/react",
     "jsx": "react-jsx",
     "paths": {
-      "@pages/*": ["src/pages/*"],
+      "@views/*": ["src/views/*"],
       "@api/*": ["src/api/*"],
       "@components/*": ["src/components/*"],
       "@constants/*": ["src/constants/*"],
       "@store/*": ["src/store/*"],
       "@services/*": ["src/services/*"],
-      "@features/*": ["src/features/*"],
       "@providers/*": ["src/providers/*"],
       "@router": ["src/router"]
     }

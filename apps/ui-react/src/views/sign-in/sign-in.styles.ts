@@ -2,22 +2,6 @@ import { css } from '@emotion/react';
 import type { Theme } from '@mui/material/styles';
 
 export const styles = {
-  container: (theme: Partial<Theme>) => css`
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 24px 0;
-    width: 500px;
-    margin: 0 auto;
-    padding: ${theme.spacing?.(3)};
-  `,
-  avatar: (theme: Partial<Theme>) => css`
-    background: ${theme.palette?.secondary.main};
-
-    & svg {
-      color: ${theme.palette?.common.white};
-    }
-  `,
   title: css`
     width: 100%;
     text-align: center;

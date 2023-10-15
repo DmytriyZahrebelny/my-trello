@@ -1,33 +1,57 @@
-import { Suspense } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 
-import { Authorization, SignIn, SignUp } from '@pages/authorization';
-import { Workspaces } from '@pages/workspaces';
-import { Board } from '@pages/board';
-import { useAuthContext } from '@providers/auth-provider';
-import { ROUTES } from '../constants';
-import { Loading } from '../components/loading';
+import { ROUTES } from '@constants/routes';
+import { Layout } from '@components/layout';
+import { AuthorizationLayout } from '@components/authorization-layout';
+import { ContentLayout } from '@components/content-layout';
+import { Workspaces } from '@views/workspaces';
+import { Board } from '@views/board';
+import { SignIn } from '@views/sign-in';
+import { SignUp } from '@views/sign-up';
 
-export const Routing = () => {
-  const { isAuthorized, isLoading } = useAuthContext();
+const authRouter = [
+  {
+    path: '/',
+    element: <AuthorizationLayout />,
+    children: [
+      {
+        index: true,
+        element: <SignIn />,
+      },
+      {
+        path: ROUTES.signIn,
+        element: <SignIn />,
+      },
+      {
+        path: ROUTES.signUp,
+        element: <SignUp />,
+      },
+    ],
+  },
+];
 
-  return isLoading ? (
-    <Loading />
-  ) : isAuthorized ? (
-    <Suspense fallback={<Loading />}>
-      <Routes>
-        <Route path="/" element={<Workspaces />} />
-        <Route path="/:boardId" element={<Board />} />
-      </Routes>
-    </Suspense>
-  ) : (
-    <Suspense fallback={<Loading />}>
-      <Routes>
-        <Route path="/" element={<Authorization />}>
-          <Route index element={<SignIn />} />
-          <Route path={ROUTES.signUp} element={<SignUp />} />
-        </Route>
-      </Routes>
-    </Suspense>
-  );
-};
+const contentRouter = [
+  {
+    path: '/',
+    element: <ContentLayout />,
+    children: [
+      {
+        index: true,
+        element: <Workspaces />,
+      },
+      {
+        path: '/:boardId',
+        element: <Board />,
+      },
+    ],
+  },
+];
+
+export const getRouterSchema = (isAuth: boolean) =>
+  createBrowserRouter([
+    {
+      path: '/',
+      element: <Layout />,
+      children: isAuth ? authRouter : contentRouter,
+    },
+  ]);
