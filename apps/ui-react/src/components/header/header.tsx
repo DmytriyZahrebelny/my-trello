@@ -1,13 +1,15 @@
 import { TextField, Typography } from '@mui/material';
+import type { User } from '@shared/types';
 
-import { useUser } from '@api/api-authorization/api-authorization';
 import { HeaderThemeSwitch } from './header-theme-switch';
 import { HeaderAvatar } from './header-avatar';
 import { styles } from './header.styles';
 
-export const Header = () => {
-  const { data: user } = useUser();
+interface Props {
+  user?: User;
+}
 
+export const Header = ({ user }: Props) => {
   return (
     <header css={styles.header}>
       <div css={styles.leftContent}>
